@@ -56,6 +56,12 @@ namespace ZuulCS
 			while (! finished) {
 				Command command = parser.getCommand();
 				finished = processCommand(command);
+                if(player.isAlive() == false)
+                {
+                    finished = true;
+                    Console.WriteLine("Game Over");
+                    Console.WriteLine("You've Died");
+                }
 			}
 			Console.WriteLine("Thank you for playing.");
 		}
@@ -143,6 +149,7 @@ namespace ZuulCS
 			if (nextRoom == null) {
 				Console.WriteLine("There is no door to "+direction+"!");
 			} else {
+                player.damage(25);
 				player.setCurrentRoom(nextRoom);
 				Console.WriteLine(player.getCurrentRoom().getLongDescription());
 			}
