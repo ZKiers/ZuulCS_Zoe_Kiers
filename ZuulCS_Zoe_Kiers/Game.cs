@@ -5,10 +5,11 @@ namespace ZuulCS
 	public class Game
 	{
 		private Parser parser;
-		private Room currentRoom;
+        private Player player;
 
 		public Game ()
 		{
+            player = new Player();
 			createRooms();
 			parser = new Parser();
 		}
@@ -38,7 +39,7 @@ namespace ZuulCS
 
 			office.setExit("west", lab);
 
-			currentRoom = outside;  // start game outside
+			player.setCurrentRoom(outside);  // start game outside
 		}
 
 
@@ -69,7 +70,7 @@ namespace ZuulCS
 			Console.WriteLine("Zuul is a new, incredibly boring adventure game.");
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
-			Console.WriteLine(currentRoom.getLongDescription());
+			Console.WriteLine(player.getCurrentRoom().getLongDescription());
 		}
 
 		/**
@@ -98,7 +99,7 @@ namespace ZuulCS
 					wantToQuit = true;
 					break;
                 case "look":
-                    Console.WriteLine(currentRoom.getLongDescription());
+                    Console.WriteLine(player.getCurrentRoom().getLongDescription());
                     break;
 
             }
@@ -137,13 +138,13 @@ namespace ZuulCS
 			string direction = command.getSecondWord();
 
 			// Try to leave current room.
-			Room nextRoom = currentRoom.getExit(direction);
+			Room nextRoom = player.getCurrentRoom().getExit(direction);
 
 			if (nextRoom == null) {
 				Console.WriteLine("There is no door to "+direction+"!");
 			} else {
-				currentRoom = nextRoom;
-				Console.WriteLine(currentRoom.getLongDescription());
+				player.setCurrentRoom(nextRoom);
+				Console.WriteLine(player.getCurrentRoom().getLongDescription());
 			}
 		}
 
