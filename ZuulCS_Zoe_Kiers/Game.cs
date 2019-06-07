@@ -26,9 +26,9 @@ namespace ZuulCS
 			office = new Room("in the computing admin office");
 			treeHouse = new Room("in the secret tree house built by the seniors");
 			// create the items for in the rooms
-			Item sword = new Item("Sword");
+			Item sword = new Item("Sword", 4);
 
-			// initialise room exits
+			// initialise room exits and put items in the rooms.
 			outside.setExit("east", theatre);
 			outside.setExit("south", lab);
 			outside.setExit("west", pub);
@@ -120,7 +120,7 @@ namespace ZuulCS
 					Console.WriteLine(player.getHealth());
 					break;
 				case "inventory":
-					Console.WriteLine(player.GetInventory());
+					Console.WriteLine(player.GetInventoryDesc());
 					break;
 				case "take":
 					Console.WriteLine(player.PickupItem(command));
