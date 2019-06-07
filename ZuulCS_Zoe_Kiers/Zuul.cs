@@ -7,7 +7,7 @@ namespace ZuulCS
 		/**
 		 * Create and play the Game.
 		 */
-		public static void Main (string[] args)
+		public static void Main(string[] args)
 		{
 			Game game = new Game();
 			game.play();

@@ -16,7 +16,10 @@ namespace ZuulCS
 				"go",
 				"quit",
 				"help",
-                "look"
+				"look",
+				"inventory",
+				"take",
+				"drop"
 			};
 		}
 
@@ -26,8 +29,10 @@ namespace ZuulCS
 	     */
 		public bool isCommand(string instring)
 		{
-			for(int i = 0; i < validCommands.Length; i++) {
-				if (validCommands[i] == instring) {
+			for (int i = 0; i < validCommands.Length; i++)
+			{
+				if (validCommands[i] == instring)
+				{
 					return true;
 				}
 			}
@@ -40,9 +45,11 @@ namespace ZuulCS
 	     */
 		public void showAll()
 		{
-			for(int i = 0; i < validCommands.Length; i++) {
+			for (int i = 0; i < validCommands.Length; i++)
+			{
 				Console.Write(validCommands[i]);
-				if (i != validCommands.Length - 1) {
+				if (i != validCommands.Length - 1)
+				{
 					Console.Write(", ");
 				}
 			}

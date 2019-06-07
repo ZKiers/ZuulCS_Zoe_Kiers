@@ -6,6 +6,7 @@ namespace ZuulCS
 	{
 		private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.
+		public Inventory inventory = new Inventory();
 
 		/**
 	     * Create a room described "description". Initially, it has no exits.
@@ -34,7 +35,18 @@ namespace ZuulCS
 		{
 			return description;
 		}
-
+		public string GetItemDescription()
+		{
+			if (inventory.ShowItems() != null)
+			{
+				if (inventory.GetItemAmount() == 1)
+				{
+					return "There is one item in this room: " + inventory.ShowItems() + ".";
+				}
+				return "There are multiple items in this room: " + inventory.ShowItems() + ".";
+			}
+			return "There are no items in this room.";
+		}
 		/**
 	     * Return a long description of this room, in the form:
 	     *     You are in the kitchen.
@@ -45,6 +57,8 @@ namespace ZuulCS
 			string returnstring = "You are ";
 			returnstring += description;
 			returnstring += ".\n";
+			returnstring += GetItemDescription();
+			returnstring += "\n";
 			returnstring += getExitstring();
 			return returnstring;
 		}
@@ -59,8 +73,10 @@ namespace ZuulCS
 
 			// because `exits` is a Dictionary, we can't use a `for` loop
 			int commas = 0;
-			foreach (string key in exits.Keys) {
-				if (commas != 0 && commas != exits.Count) {
+			foreach (string key in exits.Keys)
+			{
+				if (commas != 0 && commas != exits.Count)
+				{
 					returnstring += ",";
 				}
 				commas++;
@@ -75,9 +91,12 @@ namespace ZuulCS
 	     */
 		public Room getExit(string direction)
 		{
-			if (exits.ContainsKey(direction)) {
+			if (exits.ContainsKey(direction))
+			{
 				return (Room)exits[direction];
-			} else {
+			}
+			else
+			{
 				return null;
 			}
 

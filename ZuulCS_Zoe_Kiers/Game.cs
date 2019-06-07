@@ -5,11 +5,11 @@ namespace ZuulCS
 	public class Game
 	{
 		private Parser parser;
-        private Player player;
+		private Player player;
 
-		public Game ()
+		public Game()
 		{
-            player = new Player();
+			player = new Player();
 			createRooms();
 			parser = new Parser();
 		}
@@ -24,15 +24,18 @@ namespace ZuulCS
 			pub = new Room("in the campus pub");
 			lab = new Room("in a computing lab");
 			office = new Room("in the computing admin office");
-            treeHouse = new Room("in the secret tree house built by the seniors");
+			treeHouse = new Room("in the secret tree house built by the seniors");
+			// create the items for in the rooms
+			Item sword = new Item("Sword");
 
 			// initialise room exits
 			outside.setExit("east", theatre);
 			outside.setExit("south", lab);
 			outside.setExit("west", pub);
-            outside.setExit("up", treeHouse);
+			outside.setExit("up", treeHouse);
 
 			theatre.setExit("west", outside);
+			theatre.inventory.AddItem(sword);
 
 			pub.setExit("east", outside);
 
@@ -41,9 +44,9 @@ namespace ZuulCS
 
 			office.setExit("west", lab);
 
-            treeHouse.setExit("down", outside);
+			treeHouse.setExit("down", outside);
 
-			player.setCurrentRoom(outside);  // start game outside
+			player.SetCurrentRoom(outside);  // start game outside
 		}
 
 
@@ -57,15 +60,16 @@ namespace ZuulCS
 			// Enter the main command loop.  Here we repeatedly read commands and
 			// execute them until the game is over.
 			bool finished = false;
-			while (! finished) {
+			while (!finished)
+			{
 				Command command = parser.getCommand();
 				finished = processCommand(command);
-                if(player.isAlive() == false)
-                {
-                    finished = true;
-                    Console.WriteLine("Game Over");
-                    Console.WriteLine("You've Died");
-                }
+				if (!player.isAlive())
+				{
+					finished = true;
+					Console.WriteLine("Game Over");
+					Console.WriteLine("You've Died");
+				}
 			}
 			Console.WriteLine("Thank you for playing.");
 		}
@@ -80,7 +84,8 @@ namespace ZuulCS
 			Console.WriteLine("Zuul is a new, incredibly boring adventure game.");
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
-			Console.WriteLine(player.getCurrentRoom().getLongDescription());
+			Console.WriteLine(player.GetCurrentRoom().getLongDescription());
+			Console.WriteLine(player.getHealth());
 		}
 
 		/**
@@ -92,13 +97,15 @@ namespace ZuulCS
 		{
 			bool wantToQuit = false;
 
-			if(command.isUnknown()) {
+			if (command.isUnknown())
+			{
 				Console.WriteLine("I don't know what you mean...");
 				return false;
 			}
 
 			string commandWord = command.getCommandWord();
-			switch (commandWord) {
+			switch (commandWord)
+			{
 				case "help":
 					printHelp();
 					break;
@@ -108,15 +115,23 @@ namespace ZuulCS
 				case "quit":
 					wantToQuit = true;
 					break;
-                case "look":
-                    Console.WriteLine(player.getCurrentRoom().getLongDescription());
-                    break;
-
-            }
+				case "look":
+					Console.WriteLine(player.GetCurrentRoom().getLongDescription());
+					Console.WriteLine(player.getHealth());
+					break;
+				case "inventory":
+					Console.WriteLine(player.GetInventory());
+					break;
+				case "take":
+					Console.WriteLine(player.PickupItem(command));
+					break;
+				case "drop":
+					Console.WriteLine(player.DropItem(command));
+					break;
+			}
 
 			return wantToQuit;
 		}
-
 		// implementations of user commands:
 
 		/**
@@ -139,7 +154,8 @@ namespace ZuulCS
 	     */
 		private void goRoom(Command command)
 		{
-			if(!command.hasSecondWord()) {
+			if (!command.hasSecondWord())
+			{
 				// if there is no second word, we don't know where to go...
 				Console.WriteLine("Go where?");
 				return;
@@ -148,14 +164,17 @@ namespace ZuulCS
 			string direction = command.getSecondWord();
 
 			// Try to leave current room.
-			Room nextRoom = player.getCurrentRoom().getExit(direction);
+			Room nextRoom = player.GetCurrentRoom().getExit(direction);
 
-			if (nextRoom == null) {
-				Console.WriteLine("There is no door to "+direction+"!");
-			} else {
-                player.damage(25);
-				player.setCurrentRoom(nextRoom);
-				Console.WriteLine(player.getCurrentRoom().getLongDescription());
+			if (nextRoom == null)
+			{
+				Console.WriteLine("There is no door to " + direction + "!");
+			}
+			else
+			{
+				//player.damage(25);
+				player.SetCurrentRoom(nextRoom);
+				Console.WriteLine(player.GetCurrentRoom().getLongDescription());
 			}
 		}
 
