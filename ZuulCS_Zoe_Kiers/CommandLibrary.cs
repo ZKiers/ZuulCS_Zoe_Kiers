@@ -19,7 +19,10 @@ namespace ZuulCS
 				"look",
 				"inventory",
 				"take",
-				"drop"
+				"drop",
+				"use",
+				"attack",
+				"equip"
 			};
 		}
 

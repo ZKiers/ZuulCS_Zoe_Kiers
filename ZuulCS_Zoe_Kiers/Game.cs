@@ -26,7 +26,7 @@ namespace ZuulCS
 			office = new Room("in the computing admin office");
 			treeHouse = new Room("in the secret tree house built by the seniors");
 			// create the items for in the rooms
-			Item sword = new Item("Sword", 4);
+			Weapon sword = new Weapon("Sword", 4, 50);
 
 			// initialise room exits and put items in the rooms.
 			outside.setExit("east", theatre);
@@ -67,8 +67,8 @@ namespace ZuulCS
 				if (!player.isAlive())
 				{
 					finished = true;
-					Console.WriteLine("Game Over");
-					Console.WriteLine("You've Died");
+					TextEffects.ErrorMessage("Game Over");
+					TextEffects.ErrorMessage("You've Died");
 				}
 			}
 			Console.WriteLine("Thank you for playing.");
@@ -99,7 +99,7 @@ namespace ZuulCS
 
 			if (command.isUnknown())
 			{
-				Console.WriteLine("I don't know what you mean...");
+				TextEffects.ErrorMessage("I don't know what you mean...");
 				return false;
 			}
 
@@ -116,17 +116,26 @@ namespace ZuulCS
 					wantToQuit = true;
 					break;
 				case "look":
-					Console.WriteLine(player.GetCurrentRoom().getLongDescription());
-					Console.WriteLine(player.getHealth());
+					TextEffects.CheckNullWriteLine(player.GetCurrentRoom().getLongDescription());
+					TextEffects.CheckNullWriteLine(player.getHealth());
 					break;
 				case "inventory":
-					Console.WriteLine(player.GetInventoryDesc());
+					TextEffects.CheckNullWriteLine(player.GetInventoryDesc());
 					break;
 				case "take":
-					Console.WriteLine(player.PickupItem(command));
+					TextEffects.CheckNullWriteLine(player.PickupItem(command));
 					break;
 				case "drop":
-					Console.WriteLine(player.DropItem(command));
+					TextEffects.CheckNullWriteLine(player.DropItem(command));
+					break;
+				case "use":
+					TextEffects.CheckNullWriteLine(player.UseItem(command));
+					break;
+				case "attack":
+					TextEffects.CheckNullWriteLine(player.Attack());
+					break;
+				case "equip":
+					TextEffects.CheckNullWriteLine(player.EquipItem(command));
 					break;
 			}
 
@@ -157,7 +166,7 @@ namespace ZuulCS
 			if (!command.hasSecondWord())
 			{
 				// if there is no second word, we don't know where to go...
-				Console.WriteLine("Go where?");
+				TextEffects.ErrorMessage("Go where?");
 				return;
 			}
 
@@ -168,11 +177,10 @@ namespace ZuulCS
 
 			if (nextRoom == null)
 			{
-				Console.WriteLine("There is no door to " + direction + "!");
+				TextEffects.ErrorMessage("There is no door to " + direction + "!");
 			}
 			else
 			{
-				//player.damage(25);
 				player.SetCurrentRoom(nextRoom);
 				Console.WriteLine(player.GetCurrentRoom().getLongDescription());
 			}

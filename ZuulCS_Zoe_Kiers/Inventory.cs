@@ -9,9 +9,16 @@ namespace ZuulCS
 	public class Inventory
 	{
 		private List<Item> contents = new List<Item>();
-		public Inventory()
+		private int weightLimit;
+		private bool limitWeight;
+		public Inventory(int setWeightLimit)
 		{
-
+			weightLimit = setWeightLimit;
+			limitWeight = false;
+			if (weightLimit > 0)
+			{
+				limitWeight = true;
+			}
 		}
 		public void AddItem(Item input)
 		{
@@ -25,23 +32,27 @@ namespace ZuulCS
 		{
 			for (int i = 0; i <= (contents.Count - 1); i++)
 			{
-				if (contents[i].GetName() == name)
+				if (string.Compare(contents[i].GetName(), name) == 0)
 				{
 					return contents[i];
 				}
 			}
 			return null;
 		}
-		public bool TakeItemFrom(Inventory target, String itemName)
+		public int TakeItemFrom(Inventory target, String itemName)
 		{
 			Item item = target.FindItem(itemName);
 			if (item != null)
 			{
+				if((item.GetWeight() + GetCurrentWeight()) > weightLimit && this.limitWeight)
+				{
+					return 2;
+				}
 				target.RemoveItem(item);
 				AddItem(item);
-				return true;
+				return 1;
 			}
-			return false;
+			return 0;
 		}
 		public int GetItemAmount()
 		{
@@ -57,6 +68,19 @@ namespace ZuulCS
 			for (int i = 0; i < contents.Count; i++)
 				output += (contents.Count - i) > 1 ? contents[i].GetName() + ", " : contents[i].GetName();
 			return output;
+		}
+		public int GetCurrentWeight()
+		{
+			int output = 0;
+			for (int i = 0; i < contents.Count; i++)
+			{
+				output += contents[i].GetWeight();
+			}
+			return output;
+		}
+		public int getWeightLimit()
+		{
+			return weightLimit;
 		}
 	}
 }
