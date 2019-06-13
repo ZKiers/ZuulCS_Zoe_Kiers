@@ -20,7 +20,7 @@ namespace ZuulCS
 	     * Return the command word (the first word) of this command. If the
 	     * command was not understood, the result is null.
 	     */
-		public string getCommandWord()
+		public string GetCommandWord()
 		{
 			return commandWord;
 		}
@@ -29,7 +29,7 @@ namespace ZuulCS
 	     * Return the second word of this command. Returns null if there was no
 	     * second word.
 	     */
-		public string getSecondWord()
+		public string GetSecondWord()
 		{
 			return secondWord;
 		}
@@ -37,7 +37,7 @@ namespace ZuulCS
 		/**
 	     * Return true if this command was not understood.
 	     */
-		public bool isUnknown()
+		public bool IsUnknown()
 		{
 			return (commandWord == null);
 		}
@@ -45,7 +45,7 @@ namespace ZuulCS
 		/**
 	     * Return true if the command has a second word.
 	     */
-		public bool hasSecondWord()
+		public bool HasSecondWord()
 		{
 			return (secondWord != null);
 		}

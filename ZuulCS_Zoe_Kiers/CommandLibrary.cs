@@ -22,7 +22,8 @@ namespace ZuulCS
 				"drop",
 				"use",
 				"attack",
-				"equip"
+				"equip",
+				"unequip"
 			};
 		}
 
@@ -30,7 +31,7 @@ namespace ZuulCS
 	     * Check whether a given string is a valid command word.
 	     * Return true if it is, false if it isn't.
 	     */
-		public bool isCommand(string instring)
+		public bool IsCommand(string instring)
 		{
 			for (int i = 0; i < validCommands.Length; i++)
 			{
@@ -46,7 +47,7 @@ namespace ZuulCS
 		/**
 	     * Print all valid commands to Console.WriteLine.
 	     */
-		public void showAll()
+		public void ShowAll()
 		{
 			for (int i = 0; i < validCommands.Length; i++)
 			{

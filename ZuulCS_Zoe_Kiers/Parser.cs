@@ -14,7 +14,7 @@ namespace ZuulCS
 		/**
 	     * Ask and interpret the user input. Return a Command object.
 	     */
-		public Command getCommand()
+		public Command GetCommand()
 		{
 			Console.Write("> ");     // print prompt
 
@@ -26,7 +26,7 @@ namespace ZuulCS
 			if (words.Length > 1) { word2 = words[1]; }
 
 			// Now check whether this word is known. If so, create a command with it.
-			if (commands.isCommand(word1))
+			if (commands.IsCommand(word1))
 			{
 				return new Command(word1, word2);
 			}
@@ -38,9 +38,9 @@ namespace ZuulCS
 		/**
 	     * Print out a list of valid command words.
 	     */
-		public void showCommands()
+		public void ShowCommands()
 		{
-			commands.showAll();
+			commands.ShowAll();
 		}
 	}
 }

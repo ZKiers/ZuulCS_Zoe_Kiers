@@ -78,7 +78,7 @@ namespace ZuulCS
 			}
 			return output;
 		}
-		public int getWeightLimit()
+		public int GetWeightLimit()
 		{
 			return weightLimit;
 		}

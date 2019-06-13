@@ -10,11 +10,11 @@ namespace ZuulCS
 		public Game()
 		{
 			player = new Player();
-			createRooms();
+			CreateRooms();
 			parser = new Parser();
 		}
 
-		private void createRooms()
+		private void CreateRooms()
 		{
 			Room outside, theatre, pub, lab, office, treeHouse;
 
@@ -29,22 +29,22 @@ namespace ZuulCS
 			Weapon sword = new Weapon("Sword", 4, 50);
 
 			// initialise room exits and put items in the rooms.
-			outside.setExit("east", theatre);
-			outside.setExit("south", lab);
-			outside.setExit("west", pub);
-			outside.setExit("up", treeHouse);
+			outside.SetExit("east", theatre);
+			outside.SetExit("south", lab);
+			outside.SetExit("west", pub);
+			outside.SetExit("up", treeHouse);
 
-			theatre.setExit("west", outside);
+			theatre.SetExit("west", outside);
 			theatre.inventory.AddItem(sword);
 
-			pub.setExit("east", outside);
+			pub.SetExit("east", outside);
 
-			lab.setExit("north", outside);
-			lab.setExit("east", office);
+			lab.SetExit("north", outside);
+			lab.SetExit("east", office);
 
-			office.setExit("west", lab);
+			office.SetExit("west", lab);
 
-			treeHouse.setExit("down", outside);
+			treeHouse.SetExit("down", outside);
 
 			player.SetCurrentRoom(outside);  // start game outside
 		}
@@ -53,18 +53,18 @@ namespace ZuulCS
 		/**
 	     *  Main play routine.  Loops until end of play.
 	     */
-		public void play()
+		public void Play()
 		{
-			printWelcome();
+			PrintWelcome();
 
 			// Enter the main command loop.  Here we repeatedly read commands and
 			// execute them until the game is over.
 			bool finished = false;
 			while (!finished)
 			{
-				Command command = parser.getCommand();
-				finished = processCommand(command);
-				if (!player.isAlive())
+				Command command = parser.GetCommand();
+				finished = ProcessCommand(command);
+				if (!player.IsAlive())
 				{
 					finished = true;
 					TextEffects.ErrorMessage("Game Over");
@@ -77,15 +77,15 @@ namespace ZuulCS
 		/**
 	     * Print out the opening message for the player.
 	     */
-		private void printWelcome()
+		private void PrintWelcome()
 		{
 			Console.WriteLine();
 			Console.WriteLine("Welcome to Zuul!");
 			Console.WriteLine("Zuul is a new, incredibly boring adventure game.");
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
-			Console.WriteLine(player.GetCurrentRoom().getLongDescription());
-			Console.WriteLine(player.getHealth());
+			Console.WriteLine(player.GetCurrentRoom().GetLongDescription());
+			Console.WriteLine(player.GetHealth());
 		}
 
 		/**
@@ -93,31 +93,31 @@ namespace ZuulCS
 	     * If this command ends the game, true is returned, otherwise false is
 	     * returned.
 	     */
-		private bool processCommand(Command command)
+		private bool ProcessCommand(Command command)
 		{
 			bool wantToQuit = false;
 
-			if (command.isUnknown())
+			if (command.IsUnknown())
 			{
 				TextEffects.ErrorMessage("I don't know what you mean...");
 				return false;
 			}
 
-			string commandWord = command.getCommandWord();
+			string commandWord = command.GetCommandWord();
 			switch (commandWord)
 			{
 				case "help":
-					printHelp();
+					PrintHelp();
 					break;
 				case "go":
-					goRoom(command);
+					GoRoom(command);
 					break;
 				case "quit":
 					wantToQuit = true;
 					break;
 				case "look":
-					TextEffects.CheckNullWriteLine(player.GetCurrentRoom().getLongDescription());
-					TextEffects.CheckNullWriteLine(player.getHealth());
+					TextEffects.CheckNullWriteLine(player.GetCurrentRoom().GetLongDescription());
+					TextEffects.CheckNullWriteLine(player.GetHealth());
 					break;
 				case "inventory":
 					TextEffects.CheckNullWriteLine(player.GetInventoryDesc());
@@ -137,6 +137,9 @@ namespace ZuulCS
 				case "equip":
 					TextEffects.CheckNullWriteLine(player.EquipItem(command));
 					break;
+				case "unequip":
+					TextEffects.CheckNullWriteLine(player.Unequip());
+					break;
 			}
 
 			return wantToQuit;
@@ -148,32 +151,32 @@ namespace ZuulCS
 	     * Here we print some stupid, cryptic message and a list of the
 	     * command words.
 	     */
-		private void printHelp()
+		private void PrintHelp()
 		{
 			Console.WriteLine("You are lost. You are alone.");
 			Console.WriteLine("You wander around at the university.");
 			Console.WriteLine();
 			Console.WriteLine("Your command words are:");
-			parser.showCommands();
+			parser.ShowCommands();
 		}
 
 		/**
 	     * Try to go to one direction. If there is an exit, enter the new
 	     * room, otherwise print an error message.
 	     */
-		private void goRoom(Command command)
+		private void GoRoom(Command command)
 		{
-			if (!command.hasSecondWord())
+			if (!command.HasSecondWord())
 			{
 				// if there is no second word, we don't know where to go...
 				TextEffects.ErrorMessage("Go where?");
 				return;
 			}
 
-			string direction = command.getSecondWord();
+			string direction = command.GetSecondWord();
 
 			// Try to leave current room.
-			Room nextRoom = player.GetCurrentRoom().getExit(direction);
+			Room nextRoom = player.GetCurrentRoom().GetExit(direction);
 
 			if (nextRoom == null)
 			{
@@ -182,7 +185,7 @@ namespace ZuulCS
 			else
 			{
 				player.SetCurrentRoom(nextRoom);
-				Console.WriteLine(player.GetCurrentRoom().getLongDescription());
+				Console.WriteLine(player.GetCurrentRoom().GetLongDescription());
 			}
 		}
 

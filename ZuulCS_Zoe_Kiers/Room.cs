@@ -22,7 +22,7 @@ namespace ZuulCS
 		/**
 	     * Define an exit from this room.
 	     */
-		public void setExit(string direction, Room neighbor)
+		public void SetExit(string direction, Room neighbor)
 		{
 			exits[direction] = neighbor;
 		}
@@ -31,7 +31,7 @@ namespace ZuulCS
 	     * Return the description of the room (the one that was defined in the
 	     * constructor).
 	     */
-		public string getShortDescription()
+		public string GetShortDescription()
 		{
 			return description;
 		}
@@ -52,14 +52,14 @@ namespace ZuulCS
 	     *     You are in the kitchen.
 	     *     Exits: north west
 	     */
-		public string getLongDescription()
+		public string GetLongDescription()
 		{
 			string returnstring = "You are ";
 			returnstring += description;
 			returnstring += ".\n";
 			returnstring += GetItemDescription();
 			returnstring += "\n";
-			returnstring += getExitstring();
+			returnstring += GetExitstring();
 			return returnstring;
 		}
 
@@ -67,7 +67,7 @@ namespace ZuulCS
 	     * Return a string describing the room's exits, for example
 	     * "Exits: north, west".
 	     */
-		private string getExitstring()
+		private string GetExitstring()
 		{
 			string returnstring = "Exits:";
 
@@ -89,7 +89,7 @@ namespace ZuulCS
 	     * Return the room that is reached if we go from this room in direction
 	     * "direction". If there is no room in that direction, return null.
 	     */
-		public Room getExit(string direction)
+		public Room GetExit(string direction)
 		{
 			if (exits.ContainsKey(direction))
 			{

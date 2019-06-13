@@ -31,7 +31,7 @@ namespace ZuulCS
 		{
 			this.weight = input;
 		}
-		public virtual String useItem()
+		public virtual String UseItem()
 		{
 			return "This is just a normal item, it has no use...\n What did you want to do? Snort it??";
 		}

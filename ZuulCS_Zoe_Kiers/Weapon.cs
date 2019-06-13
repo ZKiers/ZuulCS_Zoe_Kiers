@@ -16,11 +16,11 @@ namespace ZuulCS
 			this.damage = setDamage;
 			isWeapon = true;
 		}
-		public override String useItem()
+		public override String UseItem()
 		{
 			return "This is a weapon, you don't just \"use\" it.";
 		}
-		public int getDamage()
+		public int GetDamage()
 		{
 			return damage;
 		}
