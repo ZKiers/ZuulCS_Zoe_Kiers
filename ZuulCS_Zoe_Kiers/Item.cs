@@ -11,9 +11,9 @@ namespace ZuulCS
 		private String name;
 		private int weight;
 		public bool isWeapon;
+		public bool isKey;
 		public Item()
 		{
-			isWeapon = false;
 		}
 		public String GetName()
 		{
@@ -31,7 +31,7 @@ namespace ZuulCS
 		{
 			this.weight = input;
 		}
-		public virtual String UseItem()
+		public virtual string UseItem(Command command, Room currentRoom)
 		{
 			return "This is just a normal item, it has no use...\n What did you want to do? Snort it??";
 		}

@@ -8,6 +8,11 @@ namespace ZuulCS
 		private Dictionary<string, Room> exits; // stores exits of this room.
 		public Inventory inventory = new Inventory(0);
 
+		//Makes a key, only used if the SetLocked() function is activated.
+		private string keyString;
+		private Key keyItem;
+		private bool isLocked = false;
+
 		/**
 	     * Create a room described "description". Initially, it has no exits.
 	     * "description" is something like "in a kitchen" or "in an open court
@@ -100,6 +105,28 @@ namespace ZuulCS
 				return null;
 			}
 
+		}
+		public void SetLocked(Room keyLocation, string keyName)
+		{
+			this.isLocked = true;
+			keyItem = new Key(keyName, 1);
+			keyString = keyItem.GenerateKey();
+			keyLocation.inventory.AddItem(keyItem);
+			TextEffects.ErrorMessage(keyString);
+		}
+		public bool IsLocked()
+		{
+			return isLocked;
+		}
+		public bool UseKey(Key key)
+		{
+			string hash = key.GetKey();
+			if (hash == this.keyString)
+			{
+				this.isLocked = false;
+				return true;
+			}
+			return false;
 		}
 	}
 }

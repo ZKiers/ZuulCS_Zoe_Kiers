@@ -14,9 +14,8 @@ namespace ZuulCS
 			this.SetName(name);
 			this.SetWeight(weight);
 			this.damage = setDamage;
-			isWeapon = true;
 		}
-		public override String UseItem()
+		public override string UseItem(Command command, Room currentRoom)
 		{
 			return "This is a weapon, you don't just \"use\" it.";
 		}

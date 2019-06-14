@@ -135,9 +135,18 @@ namespace ZuulCS
 				TextEffects.ErrorMessage("You cannot use something you don't have.");
 				return null;
 			}
-			return inventory.FindItem(command.GetSecondWord()).UseItem();
+			if (item is Key)
+			{
+				string output = item.UseItem(command, this.currentRoom);
+				if (output != null)
+				{
+					this.inventory.RemoveItem(item);
+				}
+				return output;
+			}
+			return item.UseItem(command, this.currentRoom);
 		}
-		public String Attack()
+		public string Attack()
 		{
 			if (this.equippedItem == null)
 			{
@@ -160,7 +169,7 @@ namespace ZuulCS
 				String output = "You cannot equip something you don't have: " + command.GetSecondWord() + ".";
 				TextEffects.ErrorMessage(output);
 				return null;
-			} else if (this.inventory.FindItem(command.GetSecondWord()).isWeapon)
+			} else if (this.inventory.FindItem(command.GetSecondWord()) is Weapon)
 			{
 				String output = "";
 				if (this.equippedItem != null)

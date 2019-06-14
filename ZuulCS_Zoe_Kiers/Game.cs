@@ -47,6 +47,10 @@ namespace ZuulCS
 			treeHouse.SetExit("down", outside);
 
 			player.SetCurrentRoom(outside);  // start game outside
+
+			//lock certain rooms
+			treeHouse.SetLocked(office, "TreeKey");
+			office.SetLocked(pub, "CoolKey");
 		}
 
 
@@ -181,6 +185,9 @@ namespace ZuulCS
 			if (nextRoom == null)
 			{
 				TextEffects.ErrorMessage("There is no door to " + direction + "!");
+			} else if(nextRoom.IsLocked())
+			{
+				TextEffects.ErrorMessage("This door is locked.");
 			}
 			else
 			{
