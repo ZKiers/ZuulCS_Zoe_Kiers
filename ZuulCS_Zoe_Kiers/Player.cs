@@ -10,6 +10,7 @@ namespace ZuulCS
 	{
 		public Inventory inventory = new Inventory(4);
 		private Room currentRoom;
+		private Room lastRoom;
 		private int health;
 		private Weapon equippedItem = null;
 
@@ -19,6 +20,7 @@ namespace ZuulCS
 		{
 			health = 100;
 			inventory.AddItem(dagger);
+			lastRoom = null;
 		}
 		public void Heal(int amount)
 		{
@@ -54,9 +56,17 @@ namespace ZuulCS
 		{
 			currentRoom = input;
 		}
+		public void SetLastRoom(Room input)
+		{
+			lastRoom = input;
+		}
 		public Room GetCurrentRoom()
 		{
 			return currentRoom;
+		}
+		public Room GetLastRoom()
+		{
+			return lastRoom;
 		}
 		public string GetInventoryDesc()
 		{

@@ -178,9 +178,10 @@ namespace ZuulCS
 			}
 
 			string direction = command.GetSecondWord();
-
+			
 			// Try to leave current room.
 			Room nextRoom = player.GetCurrentRoom().GetExit(direction);
+			if (direction == "back") { nextRoom = player.GetLastRoom(); }
 
 			if (nextRoom == null)
 			{
@@ -191,6 +192,7 @@ namespace ZuulCS
 			}
 			else
 			{
+				player.SetLastRoom(player.GetCurrentRoom());
 				player.SetCurrentRoom(nextRoom);
 				Console.WriteLine(player.GetCurrentRoom().GetLongDescription());
 			}
