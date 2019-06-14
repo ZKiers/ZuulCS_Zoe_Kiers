@@ -112,7 +112,6 @@ namespace ZuulCS
 			keyItem = new Key(keyName, 1);
 			keyString = keyItem.GenerateKey();
 			keyLocation.inventory.AddItem(keyItem);
-			TextEffects.ErrorMessage(keyString);
 		}
 		public bool IsLocked()
 		{
