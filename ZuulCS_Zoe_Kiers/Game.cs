@@ -27,6 +27,7 @@ namespace ZuulCS
 			treeHouse = new Room("in the secret tree house built by the seniors");
 			// create the items for in the rooms
 			Weapon sword = new Weapon("Sword", 4, 50);
+			HealthPotion hp1 = new HealthPotion("WeirdPotion", 0.1, 40);
 
 			// initialise room exits and put items in the rooms.
 			outside.SetExit("east", theatre);
@@ -41,6 +42,7 @@ namespace ZuulCS
 
 			lab.SetExit("north", outside);
 			lab.SetExit("east", office);
+			lab.inventory.AddItem(hp1);
 
 			office.SetExit("west", lab);
 

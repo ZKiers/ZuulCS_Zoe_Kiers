@@ -6,22 +6,18 @@ using System.Threading.Tasks;
 
 namespace ZuulCS
 {
-	public class Weapon : Item
+	public class HealthPotion : Item
 	{
-		private int damage;
-		public Weapon(String name, double weight, int setDamage)
+		public int HealingPower { get; set; }
+		public HealthPotion(string name, double weight, int healingPower)
 		{
 			this.Name = name;
 			this.Weight = weight;
-			this.damage = setDamage;
+			this.HealingPower = healingPower;
 		}
 		public override string UseItem(Command command, Room currentRoom)
 		{
-			return "This is a weapon, you don't just \"use\" it.";
-		}
-		public int GetDamage()
-		{
-			return damage;
+			return "You chug the potion down your throat not really sure what it does.";
 		}
 	}
 }

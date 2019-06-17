@@ -109,7 +109,7 @@ namespace ZuulCS
 		public void SetLocked(Room keyLocation, string keyName)
 		{
 			this.isLocked = true;
-			keyItem = new Key(keyName, 1);
+			keyItem = new Key(keyName, 0.1);
 			keyString = keyItem.GenerateKey();
 			keyLocation.inventory.AddItem(keyItem);
 		}

@@ -20,15 +20,17 @@ namespace ZuulCS
 			inventory.AddItem(startingDagger);
 			LastRoom = null;
 		}
-		public void Heal(int amount)
+		public string Heal(int amount)
 		{
 			if ((health + amount) > 100)
 			{
 				health = 100;
+				return "You've healed by: " + ((health + amount) - 100) + "!";
 			}
 			else
 			{
 				health += amount;
+				return "You've healed by: " + amount + "!";
 			}
 		}
 		public void Damage(int amount)
@@ -127,7 +129,13 @@ namespace ZuulCS
 				TextEffects.ErrorMessage("You cannot use something you don't have.");
 				return null;
 			}
-			if (item is Key)
+			if (item is HealthPotion)
+			{
+				string output = "You chug the potion not really knowing what it does.\n";
+				output += this.Heal(((HealthPotion)item).HealingPower);
+				return output;
+
+			} else if (item is Key)
 			{
 				string output = item.UseItem(command, this.CurrentRoom);
 				if (output != null)

@@ -9,7 +9,7 @@ namespace ZuulCS
 	public class Inventory
 	{
 		private List<Item> contents = new List<Item>();
-		private int weightLimit;
+		private double weightLimit;
 		private bool limitWeight;
 		public Inventory(int setWeightLimit)
 		{
@@ -69,20 +69,20 @@ namespace ZuulCS
 				output += (contents.Count - i) > 1 ? contents[i].Name + ", " : contents[i].Name;
 			return output;
 		}
-		public int GetCurrentWeight()
+		public double GetCurrentWeight()
 		{
-			int output = 0;
+			double output = 0;
 			for (int i = 0; i < contents.Count; i++)
 			{
 				output += contents[i].Weight;
 			}
 			return output;
 		}
-		public int GetWeightLeft()
+		public double GetWeightLeft()
 		{
 			return this.weightLimit - this.GetCurrentWeight();
 		}
-		public int GetWeightLimit()
+		public double GetWeightLimit()
 		{
 			return weightLimit;
 		}

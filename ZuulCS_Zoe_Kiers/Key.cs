@@ -9,7 +9,7 @@ namespace ZuulCS
 	public class Key : Item
 	{
 		private String key;
-		public Key(String name, int weight)
+		public Key(String name, double weight)
 		{
 			this.Name = name;
 			this.Weight = weight;
