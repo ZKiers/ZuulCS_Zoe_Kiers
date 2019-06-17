@@ -163,15 +163,22 @@ namespace ZuulCS
 				return null;
 			} else if (this.inventory.FindItem(command.SecondWord) is Weapon)
 			{
+				string oldItemName = null;
 				String output = "";
 				if (this.equippedItem != null)
 				{
+					oldItemName = this.equippedItem.Name;
 					inventory.AddItem(this.equippedItem);
 					output += "You've unequipped: " + this.equippedItem.Name + ".\n";
 				}
 				this.equippedItem = item;
 				this.inventory.RemoveItem(item);
 				output += "You've equipped: " + this.equippedItem.Name + ".";
+				if (inventory.GetWeightLeft() < 0)
+				{
+					CurrentRoom.inventory.TakeItemFrom(inventory, oldItemName);
+					output += "\nUnfortunately you were too weak to carry this item so you dropped it instead.";
+				}
 				return output;
 			} else
 			{
