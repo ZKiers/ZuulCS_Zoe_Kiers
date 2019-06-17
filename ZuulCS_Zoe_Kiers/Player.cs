@@ -24,8 +24,9 @@ namespace ZuulCS
 		{
 			if ((health + amount) > 100)
 			{
+				int healAmount = (health + amount) - 100;
 				health = 100;
-				return "You've healed by: " + ((health + amount) - 100) + "!";
+				return "You've healed by: " + healAmount + "!";
 			}
 			else
 			{
@@ -133,6 +134,7 @@ namespace ZuulCS
 			{
 				string output = "You chug the potion not really knowing what it does.\n";
 				output += this.Heal(((HealthPotion)item).HealingPower);
+				this.inventory.RemoveItem(item);
 				return output;
 
 			} else if (item is Key)
