@@ -78,6 +78,7 @@ namespace ZuulCS
 				}
 			}
 			Console.WriteLine("Thank you for playing.");
+			System.Threading.Thread.Sleep(3000);
 		}
 
 		/**
