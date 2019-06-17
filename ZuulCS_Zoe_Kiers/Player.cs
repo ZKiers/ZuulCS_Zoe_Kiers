@@ -8,18 +8,16 @@ namespace ZuulCS
 {
 	public class Player
 	{
-		public Inventory inventory = new Inventory(4);
+		public Inventory inventory = new Inventory(10);
 		public Room CurrentRoom { get; set; }
 		public Room LastRoom { get; set; }
 		private int health;
 		private Weapon equippedItem = null;
-
-		//Starting Items
-		private Weapon dagger = new Weapon("Dagger", 1, 5);
 		public Player()
 		{
 			health = 100;
-			inventory.AddItem(dagger);
+			Weapon startingDagger = new Weapon("Dagger", 1, 5);
+			inventory.AddItem(startingDagger);
 			LastRoom = null;
 		}
 		public void Heal(int amount)
@@ -187,9 +185,14 @@ namespace ZuulCS
 			if(this.equippedItem != null)
 			{
 				Weapon item = this.equippedItem;
-				String itemName = item.Name;
+				string itemName = item.Name;
 				this.inventory.AddItem(item);
 				this.equippedItem = null;
+				if (inventory.GetWeightLeft() < 0)
+				{
+					CurrentRoom.inventory.TakeItemFrom(inventory, itemName);
+					return "You have unequipped: " + itemName + "!\nUnfortunately you were too weak to carry this item so you dropped it instead.";
+				}
 				return "You have unequipped: " + itemName + "!";
 			}
 			TextEffects.ErrorMessage("You don't have any weapons equipped!");

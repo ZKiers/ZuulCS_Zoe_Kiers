@@ -78,6 +78,10 @@ namespace ZuulCS
 			}
 			return output;
 		}
+		public int GetWeightLeft()
+		{
+			return this.weightLimit - this.GetCurrentWeight();
+		}
 		public int GetWeightLimit()
 		{
 			return weightLimit;
