@@ -2,9 +2,9 @@ namespace ZuulCS
 {
 	public class Command
 	{
-		private string commandWord;
-		private string secondWord;
-		private string thirdWord;
+		public string CommandWord { get; set; }
+		public string SecondWord { get; set; }
+		public string ThirdWord { get; set; }
 
 		/**
 	     * Create a command object. First and second word must be supplied, but
@@ -13,39 +13,16 @@ namespace ZuulCS
 	     */
 		public Command(string firstWord, string secondWord, string thirdWord)
 		{
-			this.commandWord = firstWord;
-			this.secondWord = secondWord;
-			this.thirdWord = thirdWord;
+			this.CommandWord = firstWord;
+			this.SecondWord = secondWord;
+			this.ThirdWord = thirdWord;
 		}
-
-		/**
-	     * Return the command word (the first word) of this command. If the
-	     * command was not understood, the result is null.
-	     */
-		public string GetCommandWord()
-		{
-			return commandWord;
-		}
-
-		/**
-	     * Return the second word of this command. Returns null if there was no
-	     * second word.
-	     */
-		public string GetSecondWord()
-		{
-			return secondWord;
-		}
-		public string GetThirdWord()
-		{
-			return thirdWord;
-		}
-
 		/**
 	     * Return true if this command was not understood.
 	     */
 		public bool IsUnknown()
 		{
-			return (commandWord == null);
+			return (CommandWord == null);
 		}
 
 		/**
@@ -53,11 +30,11 @@ namespace ZuulCS
 	     */
 		public bool HasSecondWord()
 		{
-			return (secondWord != null);
+			return (SecondWord != null);
 		}
 		public bool HasThirdWord()
 		{
-			return (thirdWord != null);
+			return (ThirdWord != null);
 		}
 	}
 }

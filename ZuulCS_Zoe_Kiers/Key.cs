@@ -11,8 +11,8 @@ namespace ZuulCS
 		private String key;
 		public Key(String name, int weight)
 		{
-			this.SetName(name);
-			this.SetWeight(weight);
+			this.Name = name;
+			this.Weight = weight;
 		}
 		public string GenerateKey()
 		{
@@ -33,7 +33,7 @@ namespace ZuulCS
 		}
 		public override string UseItem(Command command, Room currentRoom)
 		{
-			string input = command.GetThirdWord();
+			string input = command.ThirdWord;
 			if(!command.HasThirdWord())
 			{
 				TextEffects.ErrorMessage("Use it on what?");

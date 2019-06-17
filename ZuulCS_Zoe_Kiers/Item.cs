@@ -8,28 +8,10 @@ namespace ZuulCS
 {
 	public class Item
 	{
-		private String name;
-		private int weight;
-		public bool isWeapon;
-		public bool isKey;
+		public string Name { get; set; }
+		public int Weight { get; set; }
 		public Item()
 		{
-		}
-		public String GetName()
-		{
-			return name;
-		}
-		public void SetName(String input)
-		{
-			this.name = input;
-		}
-		public int GetWeight()
-		{
-			return weight;
-		}
-		public void SetWeight(int input)
-		{
-			this.weight = input;
 		}
 		public virtual string UseItem(Command command, Room currentRoom)
 		{

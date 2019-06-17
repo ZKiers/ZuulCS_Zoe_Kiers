@@ -9,8 +9,8 @@ namespace ZuulCS
 	public class Player
 	{
 		public Inventory inventory = new Inventory(4);
-		private Room currentRoom;
-		private Room lastRoom;
+		public Room CurrentRoom { get; set; }
+		public Room LastRoom { get; set; }
 		private int health;
 		private Weapon equippedItem = null;
 
@@ -20,7 +20,7 @@ namespace ZuulCS
 		{
 			health = 100;
 			inventory.AddItem(dagger);
-			lastRoom = null;
+			LastRoom = null;
 		}
 		public void Heal(int amount)
 		{
@@ -52,28 +52,12 @@ namespace ZuulCS
 				return true;
 			}
 		}
-		public void SetCurrentRoom(Room input)
-		{
-			currentRoom = input;
-		}
-		public void SetLastRoom(Room input)
-		{
-			lastRoom = input;
-		}
-		public Room GetCurrentRoom()
-		{
-			return currentRoom;
-		}
-		public Room GetLastRoom()
-		{
-			return lastRoom;
-		}
 		public string GetInventoryDesc()
 		{
 			String output = "";
 			if (this.equippedItem != null)
 			{
-				output += "You have in your equipment slot: " + this.equippedItem.GetName() + ".\n";
+				output += "You have in your equipment slot: " + this.equippedItem.Name + ".\n";
 			} else
 			{
 				output += "You have no weapon in your equipment slot.\n";
@@ -91,7 +75,7 @@ namespace ZuulCS
 		}
 		public String PickupItem(Command command)
 		{
-			string itemName = command.GetSecondWord();
+			string itemName = command.SecondWord;
 			if (!command.HasSecondWord())
 			{
 				String output = "Take what?";
@@ -100,7 +84,7 @@ namespace ZuulCS
 			} else
 			{
 				String output;
-				switch (inventory.TakeItemFrom(currentRoom.inventory, command.GetSecondWord())) {
+				switch (inventory.TakeItemFrom(CurrentRoom.inventory, command.SecondWord)) {
 					case 0:
 						output = itemName + " is not present in this room.";
 						TextEffects.ErrorMessage(output);
@@ -108,7 +92,7 @@ namespace ZuulCS
 					case 1:
 						return "You picked up: " + itemName + ".";
 					case 2:
-						output = "This item is too heavy!\n" + itemName + " weighs: " + currentRoom.inventory.FindItem(itemName).GetWeight() + "kg!";
+						output = "This item is too heavy!\n" + itemName + " weighs: " + CurrentRoom.inventory.FindItem(itemName).Weight + "kg!";
 						TextEffects.ErrorMessage(output);
 						return null;
 				}
@@ -123,19 +107,19 @@ namespace ZuulCS
 			{
 				TextEffects.ErrorMessage("Drop what?");
 				return null;
-			} else if (currentRoom.inventory.TakeItemFrom(inventory, command.GetSecondWord()) == 0)
+			} else if (CurrentRoom.inventory.TakeItemFrom(inventory, command.SecondWord) == 0)
 			{
-				String output = command.GetSecondWord() + " is not in your inventory.";
+				String output = command.SecondWord + " is not in your inventory.";
 				TextEffects.ErrorMessage(output);
 				return null;
 			} else
 			{
-				return "You dropped: " + command.GetSecondWord() + ".";
+				return "You dropped: " + command.SecondWord + ".";
 			}
 		}
 		public String UseItem(Command command)
 		{
-			Item item = this.inventory.FindItem(command.GetSecondWord());
+			Item item = this.inventory.FindItem(command.SecondWord);
 			if (!command.HasSecondWord())
 			{
 				TextEffects.ErrorMessage("Use what?");
@@ -147,14 +131,14 @@ namespace ZuulCS
 			}
 			if (item is Key)
 			{
-				string output = item.UseItem(command, this.currentRoom);
+				string output = item.UseItem(command, this.CurrentRoom);
 				if (output != null)
 				{
 					this.inventory.RemoveItem(item);
 				}
 				return output;
 			}
-			return item.UseItem(command, this.currentRoom);
+			return item.UseItem(command, this.CurrentRoom);
 		}
 		public string Attack()
 		{
@@ -169,31 +153,31 @@ namespace ZuulCS
 		public String EquipItem(Command command)
 		{
 			Weapon item;
-			item = (Weapon)this.inventory.FindItem(command.GetSecondWord());
+			item = (Weapon)this.inventory.FindItem(command.SecondWord);
 			if (!command.HasSecondWord())
 			{
 				TextEffects.ErrorMessage("Equip what?");
 				return null;
 			} else if (item == null)
 			{
-				String output = "You cannot equip something you don't have: " + command.GetSecondWord() + ".";
+				String output = "You cannot equip something you don't have: " + command.SecondWord + ".";
 				TextEffects.ErrorMessage(output);
 				return null;
-			} else if (this.inventory.FindItem(command.GetSecondWord()) is Weapon)
+			} else if (this.inventory.FindItem(command.SecondWord) is Weapon)
 			{
 				String output = "";
 				if (this.equippedItem != null)
 				{
 					inventory.AddItem(this.equippedItem);
-					output += "You've unequipped: " + this.equippedItem.GetName() + ".\n";
+					output += "You've unequipped: " + this.equippedItem.Name + ".\n";
 				}
 				this.equippedItem = item;
 				this.inventory.RemoveItem(item);
-				output += "You've equipped: " + this.equippedItem.GetName() + ".";
+				output += "You've equipped: " + this.equippedItem.Name + ".";
 				return output;
 			} else
 			{
-				String output = command.GetSecondWord() + " is not a weapon!";
+				String output = command.SecondWord + " is not a weapon!";
 				TextEffects.ErrorMessage(output);
 				return null;
 			}
@@ -203,7 +187,7 @@ namespace ZuulCS
 			if(this.equippedItem != null)
 			{
 				Weapon item = this.equippedItem;
-				String itemName = item.GetName();
+				String itemName = item.Name;
 				this.inventory.AddItem(item);
 				this.equippedItem = null;
 				return "You have unequipped: " + itemName + "!";

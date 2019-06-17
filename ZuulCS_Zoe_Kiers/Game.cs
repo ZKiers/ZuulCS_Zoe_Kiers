@@ -46,7 +46,7 @@ namespace ZuulCS
 
 			treeHouse.SetExit("down", outside);
 
-			player.SetCurrentRoom(outside);  // start game outside
+			player.CurrentRoom = outside;  // start game outside
 
 			//lock certain rooms
 			treeHouse.SetLocked(office, "TreeKey");
@@ -88,7 +88,7 @@ namespace ZuulCS
 			Console.WriteLine("Zuul is a new, incredibly boring adventure game.");
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
-			Console.WriteLine(player.GetCurrentRoom().GetLongDescription());
+			Console.WriteLine(player.CurrentRoom.GetLongDescription());
 			Console.WriteLine(player.GetHealth());
 		}
 
@@ -107,7 +107,7 @@ namespace ZuulCS
 				return false;
 			}
 
-			string commandWord = command.GetCommandWord();
+			string commandWord = command.CommandWord;
 			switch (commandWord)
 			{
 				case "help":
@@ -120,7 +120,7 @@ namespace ZuulCS
 					wantToQuit = true;
 					break;
 				case "look":
-					TextEffects.CheckNullWriteLine(player.GetCurrentRoom().GetLongDescription());
+					TextEffects.CheckNullWriteLine(player.CurrentRoom.GetLongDescription());
 					TextEffects.CheckNullWriteLine(player.GetHealth());
 					break;
 				case "inventory":
@@ -177,11 +177,11 @@ namespace ZuulCS
 				return;
 			}
 
-			string direction = command.GetSecondWord();
+			string direction = command.SecondWord;
 			
 			// Try to leave current room.
-			Room nextRoom = player.GetCurrentRoom().GetExit(direction);
-			if (direction == "back") { nextRoom = player.GetLastRoom(); }
+			Room nextRoom = player.CurrentRoom.GetExit(direction);
+			if (direction == "back") { nextRoom = player.LastRoom; }
 
 			if (nextRoom == null)
 			{
@@ -192,9 +192,9 @@ namespace ZuulCS
 			}
 			else
 			{
-				player.SetLastRoom(player.GetCurrentRoom());
-				player.SetCurrentRoom(nextRoom);
-				Console.WriteLine(player.GetCurrentRoom().GetLongDescription());
+				player.LastRoom = player.CurrentRoom;
+				player.CurrentRoom = nextRoom;
+				Console.WriteLine(player.CurrentRoom.GetLongDescription());
 			}
 		}
 

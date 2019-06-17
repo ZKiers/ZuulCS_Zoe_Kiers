@@ -32,7 +32,7 @@ namespace ZuulCS
 		{
 			for (int i = 0; i <= (contents.Count - 1); i++)
 			{
-				if (string.Compare(contents[i].GetName(), name) == 0)
+				if (string.Compare(contents[i].Name, name) == 0)
 				{
 					return contents[i];
 				}
@@ -44,7 +44,7 @@ namespace ZuulCS
 			Item item = target.FindItem(itemName);
 			if (item != null)
 			{
-				if((item.GetWeight() + GetCurrentWeight()) > weightLimit && this.limitWeight)
+				if((item.Weight + GetCurrentWeight()) > weightLimit && this.limitWeight)
 				{
 					return 2;
 				}
@@ -66,7 +66,7 @@ namespace ZuulCS
 			}
 			string output = "";
 			for (int i = 0; i < contents.Count; i++)
-				output += (contents.Count - i) > 1 ? contents[i].GetName() + ", " : contents[i].GetName();
+				output += (contents.Count - i) > 1 ? contents[i].Name + ", " : contents[i].Name;
 			return output;
 		}
 		public int GetCurrentWeight()
@@ -74,7 +74,7 @@ namespace ZuulCS
 			int output = 0;
 			for (int i = 0; i < contents.Count; i++)
 			{
-				output += contents[i].GetWeight();
+				output += contents[i].Weight;
 			}
 			return output;
 		}

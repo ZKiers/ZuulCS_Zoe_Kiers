@@ -11,8 +11,8 @@ namespace ZuulCS
 		private int damage;
 		public Weapon(String name, int weight, int setDamage)
 		{
-			this.SetName(name);
-			this.SetWeight(weight);
+			this.Name = name;
+			this.Weight = weight;
 			this.damage = setDamage;
 		}
 		public override string UseItem(Command command, Room currentRoom)
