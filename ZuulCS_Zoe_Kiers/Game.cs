@@ -123,9 +123,9 @@ namespace ZuulCS
 					break;
 				case "look":
 					TextEffects.CheckNullWriteLine(player.CurrentRoom.GetLongDescription());
-					TextEffects.CheckNullWriteLine(player.GetHealth());
 					break;
 				case "inventory":
+					TextEffects.CheckNullWriteLine(player.GetHealth());
 					TextEffects.CheckNullWriteLine(player.GetInventoryDesc());
 					break;
 				case "take":
