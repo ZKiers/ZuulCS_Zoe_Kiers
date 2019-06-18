@@ -12,3 +12,10 @@ D:\schooljaar 2018-2019\periode 4\ZUUL_Zoe_Kiers\ZuulCS_Zoe_Kiers\ZuulCS_Zoe_Kie
 D:\schooljaar 2018-2019\periode 4\ZUUL_Zoe_Kiers\ZuulCS_Zoe_Kiers\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.exe
 D:\schooljaar 2018-2019\periode 4\ZUUL_Zoe_Kiers\ZuulCS_Zoe_Kiers\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.pdb
 D:\schooljaar 2018-2019\periode 4\ZUUL_Zoe_Kiers\ZuulCS_Zoe_Kiers\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.csprojAssemblyReference.cache
+D:\schooljaar 2018-2019\periode 4\zuul-cs\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.csprojAssemblyReference.cache
+D:\schooljaar 2018-2019\periode 4\zuul-cs\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.exe
+D:\schooljaar 2018-2019\periode 4\zuul-cs\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.pdb
+D:\schooljaar 2018-2019\periode 4\zuul-cs\ZuulCS_Zoe_Kiers\bin\Debug\ZuulCS_Zoe_Kiers.exe.config
+D:\schooljaar 2018-2019\periode 4\zuul-cs\ZuulCS_Zoe_Kiers\bin\Debug\ZuulCS_Zoe_Kiers.exe
+D:\schooljaar 2018-2019\periode 4\zuul-cs\ZuulCS_Zoe_Kiers\bin\Debug\ZuulCS_Zoe_Kiers.pdb
+D:\schooljaar 2018-2019\periode 4\zuul-cs\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.csproj.CoreCompileInputs.cache
