@@ -10,6 +10,7 @@ namespace ZuulCS
 		public Game()
 		{
 			player = new Player();
+			//SaveFile.LoadPlayerFromSaveFile();
 			CreateRooms();
 			parser = new Parser();
 		}
@@ -77,6 +78,7 @@ namespace ZuulCS
 					TextEffects.ErrorMessage("You've Died");
 				}
 			}
+			SaveFile.GenerateSaveFile(player);
 			Console.WriteLine("Thank you for playing.");
 			System.Threading.Thread.Sleep(3000);
 		}

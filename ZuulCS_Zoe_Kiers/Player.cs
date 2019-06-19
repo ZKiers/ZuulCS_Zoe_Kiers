@@ -11,40 +11,40 @@ namespace ZuulCS
 		public Inventory inventory = new Inventory(10);
 		public Room CurrentRoom { get; set; }
 		public Room LastRoom { get; set; }
-		private int health;
+		public int Health { get; set; }
 		private Weapon equippedItem = null;
 		public Player()
 		{
-			health = 100;
+			Health = 100;
 			Weapon startingDagger = new Weapon("Dagger", 1, 5);
 			inventory.AddItem(startingDagger);
 			LastRoom = null;
 		}
 		public string Heal(int amount)
 		{
-			if ((health + amount) > 100)
+			if ((Health + amount) > 100)
 			{
-				int healAmount = (health + amount) - 100;
-				health = 100;
+				int healAmount = (Health + amount) - 100;
+				Health = 100;
 				return "You've healed by: " + healAmount + "!";
 			}
 			else
 			{
-				health += amount;
+				Health += amount;
 				return "You've healed by: " + amount + "!";
 			}
 		}
 		public void Damage(int amount)
 		{
-			health -= amount;
+			Health -= amount;
 		}
 		public string GetHealth()
 		{
-			return "You have " + health + " health!";
+			return "You have " + Health + " health!";
 		}
 		public bool IsAlive()
 		{
-			if (health <= 0)
+			if (Health <= 0)
 			{
 				return false;
 			}
