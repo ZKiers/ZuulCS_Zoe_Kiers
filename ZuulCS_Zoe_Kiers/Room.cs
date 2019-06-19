@@ -7,6 +7,7 @@ namespace ZuulCS
 		private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.
 		public Inventory inventory = new Inventory(0);
+		public int ID { get; }
 
 		//Makes a key, only used if the SetLocked() function is activated.
 		private string keyString;
@@ -18,8 +19,9 @@ namespace ZuulCS
 	     * "description" is something like "in a kitchen" or "in an open court
 	     * yard".
 	     */
-		public Room(string description)
+		public Room(string description, int id)
 		{
+			this.ID = id;
 			this.description = description;
 			exits = new Dictionary<string, Room>();
 		}

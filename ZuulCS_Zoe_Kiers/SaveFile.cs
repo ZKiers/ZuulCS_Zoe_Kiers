@@ -3,25 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace ZuulCS
 {
 	public static class SaveFile
 	{
+		private static JavaScriptSerializer serializer = new JavaScriptSerializer();
+		private static string saveFileName = "Save.JSON";
 		public static void GenerateSaveFile(Player player)
 		{
-			string[] output = {"", ""};
-			output[0] = "" + player.Health;
-			output[1] = player.CurrentRoom.GetShortDescription();
-			System.IO.File.WriteAllLines("save.txt", output);
+			string output = serializer.Serialize(player);
+			System.IO.File.WriteAllText(saveFileName, output);
+			//string[] output = {"", ""};
+			//output[0] = "" + player.Health;
+			//output[1] = player.CurrentRoom.GetShortDescription();
+			//System.IO.File.WriteAllLines("save.txt", output);
 		}
-		public static void LoadPlayerFromSaveFile()
+		public static Player LoadPlayerFromSaveFile()
 		{
-			Player player = new Player();
-			player.inventory.RemoveItem(player.inventory.FindItem("Dagger"));
-			string[] input = System.IO.File.ReadAllLines("save.txt");
-			player.Health = int.Parse(input[0]);
-			TextEffects.ErrorMessage(input[1]);
+			Player player;
+			string input = System.IO.File.ReadAllText(saveFileName);
+			player = serializer.Deserialize<Player>(input);
+			return player;
 		}
 	}
 }
