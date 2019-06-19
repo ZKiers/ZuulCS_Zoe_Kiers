@@ -8,9 +8,9 @@ namespace ZuulCS
 {
 	public class Inventory
 	{
-		private List<Item> contents = new List<Item>();
-		private double weightLimit;
-		private bool limitWeight;
+		public List<Item> contents { get; } = new List<Item>();
+		public double weightLimit { get; }
+		public bool limitWeight { get; }
 		public Inventory(int setWeightLimit)
 		{
 			weightLimit = setWeightLimit;

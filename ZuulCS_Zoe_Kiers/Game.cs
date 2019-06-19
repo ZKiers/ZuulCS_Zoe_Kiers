@@ -22,12 +22,12 @@ namespace ZuulCS
 			Room outside, theatre, pub, lab, office, treeHouse;
 
 			// create the rooms
-			outside = new Room("outside the main entrance of the university", 1);
-			theatre = new Room("in a lecture theatre", 2);
-			pub = new Room("in the campus pub", 3);
-			lab = new Room("in a computing lab", 4);
-			office = new Room("in the computing admin office", 5);
-			treeHouse = new Room("in the secret tree house built by the seniors", 6);
+			outside = new Room("outside the main entrance of the university");
+			theatre = new Room("in a lecture theatre");
+			pub = new Room("in the campus pub");
+			lab = new Room("in a computing lab");
+			office = new Room("in the computing admin office");
+			treeHouse = new Room("in the secret tree house built by the seniors");
 			// create the items for in the rooms
 			Weapon sword = new Weapon("Sword", 4, 50);
 			HealthPotion hp1 = new HealthPotion("WeirdPotion", 0.1, 40);
@@ -80,7 +80,7 @@ namespace ZuulCS
 					TextEffects.ErrorMessage("You've Died");
 				}
 			}
-			SaveFile.GenerateSaveFile(player);
+			//SaveFile.GenerateSaveFile(player);
 			Console.WriteLine("Thank you for playing.");
 			System.Threading.Thread.Sleep(3000);
 		}

@@ -8,7 +8,7 @@ namespace ZuulCS
 {
 	public class Weapon : Item
 	{
-		private int damage;
+		public int damage { get; }
 		public Weapon(String name, double weight, int setDamage)
 		{
 			this.Name = name;
