@@ -8,6 +8,7 @@ namespace ZuulCS
 		private Dictionary<string, Room> exits; // stores exits of this room.
 		public int ID { get; set;  }
 		public Inventory inventory { get; } = new Inventory(0);
+		public List<Enemy> Enemies { get; } = new List<Enemy>();
 
 		//Makes a key, only used if the SetLocked() function is activated.
 		private string keyString;
@@ -128,5 +129,6 @@ namespace ZuulCS
 			}
 			return false;
 		}
+		public void AddEnemy(string type) { Enemy enemy = new Enemy(type); Enemies.Add(enemy); }
 	}
 }

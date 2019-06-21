@@ -13,6 +13,7 @@ namespace ZuulCS
 		public Room LastRoom { get; set; }
 		public int Health { get; set; }
 		public Weapon equippedItem { get; set; } = null;
+		public Room FightingInRoom { get; set; }
 		public Player()
 		{
 			Health = 100;
@@ -157,6 +158,11 @@ namespace ZuulCS
 			}
 			this.Damage(equippedItem.GetDamage());
 			return "Since there are no enemies you decide to fight an imaginary creature.\nYou hurt yourself like the imbecile you are...";
+		}
+		public string AttackEnemy()
+		{
+			FightingInRoom.Enemies[0].DamageEnemy(this.equippedItem.damage);
+			return "You hit the " + FightingInRoom.Enemies[0].DisplayName + " with your " + this.equippedItem.Name + " and did " + this.equippedItem.damage + " damage!";
 		}
 		public String EquipItem(Command command)
 		{

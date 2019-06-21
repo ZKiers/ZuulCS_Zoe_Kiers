@@ -8,6 +8,7 @@ namespace ZuulCS
 		private Parser parser;
 		private Player player;
 		private bool loadedFromSave;
+		private bool inCombat;
 
 		public Game()
 		{
@@ -52,6 +53,7 @@ namespace ZuulCS
 			theatre.inventory.AddItem(sword);
 
 			pub.SetExit("east", outside);
+			pub.AddEnemy("BadBoi");
 
 			lab.SetExit("north", outside);
 			lab.SetExit("east", office);
@@ -88,8 +90,11 @@ namespace ZuulCS
 			bool finished = false;
 			while (!finished)
 			{
-				Command command = parser.GetCommand();
-				finished = ProcessCommand(command);
+				if (player.IsAlive())
+				{
+					Command command = parser.GetCommand();
+					finished = ProcessCommand(command);
+				}
 				if (!player.IsAlive())
 				{
 					finished = true;
@@ -138,12 +143,15 @@ namespace ZuulCS
 					PrintHelp();
 					break;
 				case "go":
+					if (inCombat) { TextEffects.ErrorMessage("You can't do that in combat!"); break; }
 					GoRoom(command);
 					break;
 				case "quit":
+					if (inCombat) { TextEffects.ErrorMessage("You can't do that in combat!"); break; }
 					wantToQuit = true;
 					break;
 				case "look":
+					if (inCombat) { TextEffects.ErrorMessage("You can't do that in combat!"); break; }
 					TextEffects.CheckNullWriteLine(player.CurrentRoom.GetLongDescription());
 					break;
 				case "inventory":
@@ -151,15 +159,18 @@ namespace ZuulCS
 					TextEffects.CheckNullWriteLine(player.GetInventoryDesc());
 					break;
 				case "take":
+					if (inCombat) { TextEffects.ErrorMessage("You can't do that in combat!"); break; }
 					TextEffects.CheckNullWriteLine(player.PickupItem(command));
 					break;
 				case "drop":
+					if (inCombat) { TextEffects.ErrorMessage("You can't do that in combat!"); break; }
 					TextEffects.CheckNullWriteLine(player.DropItem(command));
 					break;
 				case "use":
 					TextEffects.CheckNullWriteLine(player.UseItem(command));
 					break;
 				case "attack":
+					if (inCombat) { TextEffects.CheckNullWriteLine(player.AttackEnemy()); break; }
 					TextEffects.CheckNullWriteLine(player.Attack());
 					break;
 				case "equip":
@@ -216,10 +227,37 @@ namespace ZuulCS
 			}
 			else
 			{
+				if (nextRoom.Enemies.Count > 0)
+				{
+					InitiateCombat(nextRoom);
+				}
 				player.LastRoom = player.CurrentRoom;
 				player.CurrentRoom = nextRoom;
 				Console.WriteLine(player.CurrentRoom.GetLongDescription());
 			}
+		}
+		private void InitiateCombat(Room room)
+		{
+			inCombat = true;
+			player.FightingInRoom = room;
+			while (room.Enemies.Count > 0)
+			{
+				Console.WriteLine("An enemy engages you in combat!");
+				Console.WriteLine(room.Enemies[0].DisplayName + " appeared to fight you!");
+				while (room.Enemies[0].Health > 0)
+				{
+					player.Damage(room.Enemies[0].AttackPlayer());
+					TextEffects.ErrorMessage(room.Enemies[0].attackDesc);
+					if (!player.IsAlive()) { break; }
+					Console.WriteLine("What do you do?");
+					Command command = parser.GetCommand();
+					ProcessCommand(command);
+				}
+				Console.WriteLine("You've successfully defeated the " + room.Enemies[0].DisplayName + "!");
+				room.Enemies.RemoveAt(0);
+			}
+			inCombat = false;
+			player.FightingInRoom = null;
 		}
 
 	}
