@@ -15,17 +15,17 @@ namespace ZuulCS
 		{
 			string output = serializer.Serialize(player);
 			System.IO.File.WriteAllText(saveFileName, output);
-			//string[] output = {"", ""};
-			//output[0] = "" + player.Health;
-			//output[1] = player.CurrentRoom.GetShortDescription();
-			//System.IO.File.WriteAllLines("save.txt", output);
 		}
 		public static Player LoadPlayerFromSaveFile()
 		{
-			Player player;
 			string input = System.IO.File.ReadAllText(saveFileName);
-			player = serializer.Deserialize<Player>(input);
-			return player;
+			Player player = serializer.Deserialize<Player>(input);
+			Player output = new Player();
+			output.Health = player.Health;
+			output.inventory = player.inventory;
+			output.equippedItem = player.equippedItem;
+			output.CurrentRoom = player.CurrentRoom;
+			return output;
 		}
 	}
 }

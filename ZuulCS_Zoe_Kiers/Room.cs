@@ -4,13 +4,13 @@ namespace ZuulCS
 {
 	public class Room
 	{
-		public string description { get; }
-		public Dictionary<string, Room> exits { get; } // stores exits of this room.
-		public Inventory inventory = new Inventory(0);
+		private string description;
+		private Dictionary<string, Room> exits; // stores exits of this room.
+		public int ID { get; set;  }
+		public Inventory inventory { get; } = new Inventory(0);
 
 		//Makes a key, only used if the SetLocked() function is activated.
 		private string keyString;
-		private Key keyItem;
 		private bool isLocked = false;
 
 		/**
@@ -23,6 +23,7 @@ namespace ZuulCS
 			this.description = description;
 			exits = new Dictionary<string, Room>();
 		}
+		public Room() { }
 
 		/**
 	     * Define an exit from this room.
@@ -109,7 +110,7 @@ namespace ZuulCS
 		public void SetLocked(Room keyLocation, string keyName)
 		{
 			this.isLocked = true;
-			keyItem = new Key(keyName, 0.1);
+			Key keyItem = new Key(keyName, 0.1);
 			keyString = keyItem.GenerateKey();
 			keyLocation.inventory.AddItem(keyItem);
 		}

@@ -12,7 +12,7 @@ namespace ZuulCS
 		public Room CurrentRoom { get; set; }
 		public Room LastRoom { get; set; }
 		public int Health { get; set; }
-		private Weapon equippedItem = null;
+		public Weapon equippedItem { get; set; } = null;
 		public Player()
 		{
 			Health = 100;

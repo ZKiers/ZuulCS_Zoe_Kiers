@@ -7,19 +7,21 @@ namespace ZuulCS
 	{
 		private Parser parser;
 		private Player player;
-		public List<Room> Rooms { get; } = new List<Room>();
+		private bool loadedFromSave;
 
 		public Game()
 		{
+			loadedFromSave = false;
 			player = new Player();
+			if (System.IO.File.Exists("Save.JSON")) { player = SaveFile.LoadPlayerFromSaveFile(); loadedFromSave = true; }
 			CreateRooms();
-			//if (System.IO.File.Exists("Save.JSON")) { player = SaveFile.LoadPlayerFromSaveFile(); }
 			parser = new Parser();
 		}
 
 		private void CreateRooms()
 		{
 			Room outside, theatre, pub, lab, office, treeHouse;
+			List<Room> rooms = new List<Room>();
 
 			// create the rooms
 			outside = new Room("outside the main entrance of the university");
@@ -28,6 +30,14 @@ namespace ZuulCS
 			lab = new Room("in a computing lab");
 			office = new Room("in the computing admin office");
 			treeHouse = new Room("in the secret tree house built by the seniors");
+
+			//Add rooms to the Rooms List
+			rooms.Add(outside);
+			rooms.Add(theatre);
+			rooms.Add(pub);
+			rooms.Add(lab);
+			rooms.Add(office);
+			rooms.Add(treeHouse);
 			// create the items for in the rooms
 			Weapon sword = new Weapon("Sword", 4, 50);
 			HealthPotion hp1 = new HealthPotion("WeirdPotion", 0.1, 40);
@@ -48,10 +58,17 @@ namespace ZuulCS
 			lab.inventory.AddItem(hp1);
 
 			office.SetExit("west", lab);
-
 			treeHouse.SetExit("down", outside);
-
-			player.CurrentRoom = outside;  // start game outside
+			//assign ID's to all rooms
+			for (int i = 0; i < (rooms.Count - 1); i++) { rooms[i].ID = i; }
+			if (loadedFromSave)
+			{
+				for (int i = 0; i < (rooms.Count - 1); i++)
+				{
+					if (player.CurrentRoom.ID == i) { player.CurrentRoom = rooms[i]; break; }
+				}
+			} else { player.CurrentRoom = outside; } // start game outside
+			
 
 			//lock certain rooms
 			treeHouse.SetLocked(office, "TreeKey");
@@ -80,9 +97,9 @@ namespace ZuulCS
 					TextEffects.ErrorMessage("You've Died");
 				}
 			}
-			//SaveFile.GenerateSaveFile(player);
+			SaveFile.GenerateSaveFile(player);
 			Console.WriteLine("Thank you for playing.");
-			System.Threading.Thread.Sleep(3000);
+			System.Threading.Thread.Sleep(500);
 		}
 
 		/**
