@@ -14,7 +14,7 @@ namespace ZuulCS
 		{
 			loadedFromSave = false;
 			player = new Player();
-			if (System.IO.File.Exists("Save.JSON")) { player = SaveFile.LoadPlayerFromSaveFile(); loadedFromSave = true; }
+			if (System.IO.File.Exists(SaveFile.saveFileName)) { player = SaveFile.LoadPlayerFromSaveFile(); loadedFromSave = true; }
 			CreateRooms();
 			parser = new Parser();
 		}
@@ -53,7 +53,7 @@ namespace ZuulCS
 			theatre.inventory.AddItem(sword);
 
 			pub.SetExit("east", outside);
-			pub.AddEnemy("BadBoi");
+			pub.AddEnemy("Fritz");
 
 			lab.SetExit("north", outside);
 			lab.SetExit("east", office);
@@ -246,12 +246,15 @@ namespace ZuulCS
 				Console.WriteLine(room.Enemies[0].DisplayName + " appeared to fight you!");
 				while (room.Enemies[0].Health > 0)
 				{
-					player.Damage(room.Enemies[0].AttackPlayer());
-					TextEffects.ErrorMessage(room.Enemies[0].attackDesc);
-					if (!player.IsAlive()) { break; }
 					Console.WriteLine("What do you do?");
 					Command command = parser.GetCommand();
 					ProcessCommand(command);
+					if (command.CommandWord == "attack" || command.CommandWord == "use" || command.CommandWord == "equip" || command.CommandWord == "unequip")
+					{
+						player.Damage(room.Enemies[0].AttackPlayer());
+						TextEffects.ErrorMessage(room.Enemies[0].attackDesc);
+					}
+					if (!player.IsAlive()) { break; }
 				}
 				Console.WriteLine("You've successfully defeated the " + room.Enemies[0].DisplayName + "!");
 				room.Enemies.RemoveAt(0);

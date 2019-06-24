@@ -24,6 +24,10 @@ namespace ZuulCS
 					this.Damage = 1;
 					this.lootQuality = 100;
 					break;
+                case "Fritz":
+                    this.Health = 95;
+                    this.Damage = 12;
+                    break;
 			}
 		}
 		public void DamageEnemy(int input)
@@ -35,8 +39,11 @@ namespace ZuulCS
 			switch (DisplayName)
 			{
 				case "BadBoi":
-					this.attackDesc = "The BadBoi swings at you with it's little knife and hits you!";
+					this.attackDesc = "The BadBoi swings at you with it's weak arms and hits you!";
 					return this.Damage;
+                case "Fritz":
+                    this.attackDesc = "Fritz stabs you with a stick!";
+                    return this.Damage;
 			}
 			return 0;
 		}

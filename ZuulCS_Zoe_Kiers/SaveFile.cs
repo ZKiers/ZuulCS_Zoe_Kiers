@@ -10,7 +10,7 @@ namespace ZuulCS
 	public static class SaveFile
 	{
 		private static JavaScriptSerializer serializer = new JavaScriptSerializer();
-		private static string saveFileName = "Save.JSON";
+		public static string saveFileName { get; } = "Save.JSON";
 		public static void GenerateSaveFile(Player player)
 		{
 			string output = serializer.Serialize(player);

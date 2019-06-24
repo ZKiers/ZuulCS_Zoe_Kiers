@@ -161,6 +161,11 @@ namespace ZuulCS
 		}
 		public string AttackEnemy()
 		{
+			if (this.equippedItem == null)
+			{
+				TextEffects.ErrorMessage("You don't have a weapon equipped!");
+				return null;
+			}
 			FightingInRoom.Enemies[0].DamageEnemy(this.equippedItem.damage);
 			return "You hit the " + FightingInRoom.Enemies[0].DisplayName + " with your " + this.equippedItem.Name + " and did " + this.equippedItem.damage + " damage!";
 		}
