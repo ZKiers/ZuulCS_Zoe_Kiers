@@ -48,7 +48,7 @@ namespace ZuulCS
 			}
 			return 0;
 		}
-		public Item Death()
+		public Weapon Death()
 		{
 			List<string> materials = new List<string>();
 			materials.Add("copper");

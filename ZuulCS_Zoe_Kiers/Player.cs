@@ -175,18 +175,20 @@ namespace ZuulCS
 		}
 		public String EquipItem(Command command)
 		{
+            string itemName = command.SecondWord;
+            if (command.HasThirdWord()) { itemName += " " + command.ThirdWord; }
 			Weapon item;
-			item = (Weapon)this.inventory.FindItem(command.SecondWord);
+			item = (Weapon)this.inventory.FindItem(itemName);
 			if (!command.HasSecondWord())
 			{
 				TextEffects.ErrorMessage("Equip what?");
 				return null;
 			} else if (item == null)
 			{
-				String output = "You cannot equip something you don't have: " + command.SecondWord + ".";
+				String output = "You cannot equip something you don't have: " + itemName + ".";
 				TextEffects.ErrorMessage(output);
 				return null;
-			} else if (this.inventory.FindItem(command.SecondWord) is Weapon)
+			} else if (item is Weapon)
 			{
 				string oldItemName = null;
 				String output = "";
