@@ -257,6 +257,7 @@ namespace ZuulCS
 					if (!player.IsAlive()) { break; }
 				}
 				Console.WriteLine("You've successfully defeated the " + room.Enemies[0].DisplayName + "!");
+				room.inventory.AddItem(room.Enemies[0].Death());
 				room.Enemies.RemoveAt(0);
 			}
 			inCombat = false;

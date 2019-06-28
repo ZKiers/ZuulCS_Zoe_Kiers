@@ -12,7 +12,7 @@ namespace ZuulCS
 		public string DisplayName { get; }
 		public int Health { get; private set; }
 		public int Damage { get; }
-		private int lootQuality;
+		public int lootQuality { get; }
 		public string attackDesc { get; private set; }
 		public Enemy(string type)
 		{
@@ -22,11 +22,12 @@ namespace ZuulCS
 				case "BadBoi":
 					this.Health = 5;
 					this.Damage = 1;
-					this.lootQuality = 100;
+					this.lootQuality = 15;
 					break;
                 case "Fritz":
                     this.Health = 95;
                     this.Damage = 12;
+					this.lootQuality = 30;
                     break;
 			}
 		}
@@ -46,6 +47,33 @@ namespace ZuulCS
                     return this.Damage;
 			}
 			return 0;
+		}
+		public Item Death()
+		{
+			List<string> materials = new List<string>();
+			materials.Add("copper");
+			materials.Add("bronze");
+			materials.Add("iron");
+			materials.Add("steel");
+
+			List<string> weapons = new List<string>();
+			weapons.Add("dagger");
+			weapons.Add("sword");
+			weapons.Add("longsword");
+			weapons.Add("mace");
+			weapons.Add("hammer");
+			weapons.Add("axe");
+
+			Random RNG = new Random();
+
+			string weaponName;
+			weaponName = materials[RNG.Next(materials.Count - 1)] + " " + weapons[RNG.Next(weapons.Count - 1)];
+			int weaponDamage = RNG.Next(lootQuality);
+			double weaponWeight = weaponDamage / 10;
+
+			Weapon output = new Weapon(weaponName, weaponWeight, weaponDamage);
+			Console.WriteLine("The " + this.DisplayName + " has dropped a " + weaponName + "!");
+			return output;
 		}
 	}
 }
