@@ -26,6 +26,15 @@ namespace ZuulCS
 			if (words.Length > 0) { word1 = words[0]; }
 			if (words.Length > 1) { word2 = words[1]; }
 			if (words.Length > 2) { word3 = words[2]; }
+			if (words.Length > 3)
+			{
+				for (int i = 2; i <= (words.Length - 2); i++)
+				{
+					if (i > 1) { word2 += " "; }
+					word2 += words[i];
+				}
+				word3 = words[words.Length - 1];
+			}
 
 			// Now check whether this word is known. If so, create a command with it.
 			if (commands.IsCommand(word1))

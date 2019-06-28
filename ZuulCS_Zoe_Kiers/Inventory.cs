@@ -29,11 +29,11 @@ namespace ZuulCS
 		{
 			contents.Remove(input);
 		}
-		public Item FindItem(String name)
+		public Item FindItem(string name)
 		{
 			for (int i = 0; i <= (contents.Count - 1); i++)
 			{
-				if (string.Compare(contents[i].Name, name) == 0)
+				if (contents[i].Name == name)
 				{
 					return contents[i];
 				}

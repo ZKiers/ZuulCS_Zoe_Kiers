@@ -78,6 +78,7 @@ namespace ZuulCS
 		public String PickupItem(Command command)
 		{
 			string itemName = command.SecondWord;
+			if (command.HasThirdWord()) { itemName += " " + command.ThirdWord; }
 			if (!command.HasSecondWord())
 			{
 				String output = "Take what?";
@@ -86,7 +87,7 @@ namespace ZuulCS
 			} else
 			{
 				String output;
-				switch (inventory.TakeItemFrom(CurrentRoom.inventory, command.SecondWord)) {
+				switch (inventory.TakeItemFrom(CurrentRoom.inventory, itemName)) {
 					case 0:
 						output = itemName + " is not present in this room.";
 						TextEffects.ErrorMessage(output);
@@ -105,23 +106,26 @@ namespace ZuulCS
 		}
 		public String DropItem(Command command)
 		{
+			string itemName = command.SecondWord;
+			if (command.HasThirdWord()) { itemName += " " + command.ThirdWord; }
 			if (!command.HasSecondWord())
 			{
 				TextEffects.ErrorMessage("Drop what?");
 				return null;
-			} else if (CurrentRoom.inventory.TakeItemFrom(inventory, command.SecondWord) == 0)
+			} else if (CurrentRoom.inventory.TakeItemFrom(inventory, itemName) == 0)
 			{
-				String output = command.SecondWord + " is not in your inventory.";
+				String output = itemName + " is not in your inventory.";
 				TextEffects.ErrorMessage(output);
 				return null;
 			} else
 			{
-				return "You dropped: " + command.SecondWord + ".";
+				return "You dropped: " + itemName + ".";
 			}
 		}
 		public String UseItem(Command command)
 		{
 			Item item = this.inventory.FindItem(command.SecondWord);
+			if (item == null && command.HasThirdWord()) { item = this.inventory.FindItem((command.SecondWord + " " + command.ThirdWord)); }
 			if (!command.HasSecondWord())
 			{
 				TextEffects.ErrorMessage("Use what?");
