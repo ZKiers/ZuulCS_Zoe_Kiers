@@ -48,7 +48,7 @@ namespace ZuulCS
 			}
 			return 0;
 		}
-		public Weapon Death()
+		public Weapon DropWeapon()
 		{
 			List<string> materials = new List<string>();
 			materials.Add("copper");
@@ -73,6 +73,24 @@ namespace ZuulCS
 
 			Weapon output = new Weapon(weaponName, weaponWeight, weaponDamage);
 			Console.WriteLine("The " + this.DisplayName + " has dropped a " + weaponName + "!");
+			return output;
+		}
+		public HealthPotion DropHealthPotion()
+		{
+			List<string> names = new List<string>();
+			names.Add("shiny potion");
+			names.Add("glistering potion");
+			names.Add("shining potion");
+			names.Add("life potion");
+
+			Random RNG = new Random();
+
+			string name = names[RNG.Next(names.Count())];
+			double weight = this.lootQuality / 20;
+			int healingPower = this.lootQuality;
+
+			HealthPotion output = new HealthPotion(name, weight, healingPower);
+			Console.WriteLine("The " + this.DisplayName + " has dropped a " + name + "!");
 			return output;
 		}
 	}

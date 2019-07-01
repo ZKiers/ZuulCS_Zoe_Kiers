@@ -240,6 +240,7 @@ namespace ZuulCS
 		{
 			inCombat = true;
 			player.FightingInRoom = room;
+			Random RNG = new Random();
 			while (room.Enemies.Count > 0)
 			{
 				Console.WriteLine("An enemy engages you in combat!");
@@ -257,7 +258,18 @@ namespace ZuulCS
 					if (!player.IsAlive()) { break; }
 				}
 				Console.WriteLine("You've successfully defeated the " + room.Enemies[0].DisplayName + "!");
-				room.inventory.AddItem(room.Enemies[0].Death());
+				switch (RNG.Next(2))
+				{
+					case 0:
+						room.inventory.AddItem(room.Enemies[0].DropWeapon());
+						break;
+					case 1:
+						room.inventory.AddItem(room.Enemies[0].DropHealthPotion());
+						break;
+					case 3:
+						Console.WriteLine(room.Enemies[0].DisplayName + " has not dropped anything!");
+						break;
+				}
 				room.Enemies.RemoveAt(0);
 			}
 			inCombat = false;
