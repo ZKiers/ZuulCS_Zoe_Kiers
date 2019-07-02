@@ -14,11 +14,18 @@ namespace ZuulCS
 		public int Health { get; set; }
 		public Weapon equippedItem { get; set; } = null;
 		public Room FightingInRoom { get; set; }
+		public Player(bool fromsave)
+		{
+			if (!fromsave)
+			{
+				Health = 100;
+				Weapon startingDagger = new Weapon("dagger", 1, 5);
+				inventory.AddItem(startingDagger);
+			}
+			LastRoom = null;
+		}
 		public Player()
 		{
-			Health = 100;
-			Weapon startingDagger = new Weapon("Dagger", 1, 5);
-			inventory.AddItem(startingDagger);
 			LastRoom = null;
 		}
 		public string Heal(int amount)

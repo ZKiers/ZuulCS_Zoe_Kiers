@@ -14,16 +14,46 @@ namespace ZuulCS
 		public static void GenerateSaveFile(Player player)
 		{
 			string output = serializer.Serialize(player);
+			for (int i = 0; i <= (player.inventory.contents.Count - 1); i++)
+			{
+				output += "\n";
+				if (player.inventory.contents[i] is Weapon)
+				{
+					output += "Weapon-";
+				} else if (player.inventory.contents[i] is HealthPotion)
+				{
+					output += "HealthPotion-";
+				} else
+				{
+					output += "Item-";
+				}
+				output += serializer.Serialize(player.inventory.contents[i]);
+			}
 			System.IO.File.WriteAllText(saveFileName, output);
 		}
 		public static Player LoadPlayerFromSaveFile()
 		{
-			string input = System.IO.File.ReadAllText(saveFileName);
-			Player player = serializer.Deserialize<Player>(input);
-			Player output = new Player();
+			string[] input = System.IO.File.ReadAllLines(saveFileName);
+			Player player = serializer.Deserialize<Player>(input[0]);
+			Player output = new Player(true);
 			output.Health = player.Health;
-			output.inventory = player.inventory;
 			output.equippedItem = player.equippedItem;
+			for (int i = 1; i <= (input.Length - 1); i++)
+			{
+				string[] itemInfo = input[i].Split('-');
+				switch (itemInfo[0])
+				{
+					case "Weapon":
+						output.inventory.AddItem(serializer.Deserialize<Weapon>(itemInfo[1]));
+						break;
+					case "HealthPotion":
+						output.inventory.AddItem(serializer.Deserialize<HealthPotion>(itemInfo[1]));
+						break;
+					case "Item":
+						output.inventory.AddItem(serializer.Deserialize<Item>(itemInfo[1]));
+						break;
+				}
+			}
 			output.CurrentRoom = player.CurrentRoom;
 			return output;
 		}
