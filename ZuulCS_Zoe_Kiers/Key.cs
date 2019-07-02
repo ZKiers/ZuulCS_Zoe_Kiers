@@ -14,6 +14,7 @@ namespace ZuulCS
 			this.Name = name;
 			this.Weight = weight;
 		}
+		public Key() { }
 		public string GenerateKey()
 		{
 			System.Threading.Thread.Sleep(20);

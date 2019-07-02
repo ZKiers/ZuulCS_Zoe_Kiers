@@ -23,6 +23,9 @@ namespace ZuulCS
 				} else if (player.inventory.contents[i] is HealthPotion)
 				{
 					output += "HealthPotion-";
+				} else if (player.inventory.contents[i] is Key)
+				{
+					output += "Key-";
 				} else
 				{
 					output += "Item-";
@@ -48,6 +51,10 @@ namespace ZuulCS
 						break;
 					case "HealthPotion":
 						output.inventory.AddItem(serializer.Deserialize<HealthPotion>(itemInfo[1]));
+						break;
+					case "Key":
+						Key key = serializer.Deserialize<Key>(itemInfo[1]);
+						Console.WriteLine("As you come back to this world the " + key.Name + " vanishes from your inventory.");
 						break;
 					case "Item":
 						output.inventory.AddItem(serializer.Deserialize<Item>(itemInfo[1]));
