@@ -37,21 +37,21 @@ namespace ZuulCS
 			string input = command.ThirdWord;
 			if(!command.HasThirdWord())
 			{
-				TextEffects.ErrorMessage("Use it on what?");
+				TextEffects.ColoredMessage("Use it on what?", "DarkRed");
 				return null;
 			}
 			Room target = currentRoom.GetExit(input);
 			if (target == null)
 			{
-				TextEffects.ErrorMessage("There is door there to unlock!");
+				TextEffects.ColoredMessage("There is door there to unlock!", "DarkRed");
 				return null;
 			} else if (!target.IsLocked())
 			{
-				TextEffects.ErrorMessage("That door isn't locked!");
+				TextEffects.ColoredMessage("That door isn't locked!", "DarkRed");
 				return null;
 			} else if (!target.UseKey(this))
 			{
-				TextEffects.ErrorMessage("You fiddle with the key in the lock but you can't seem to unlock it.");
+				TextEffects.ColoredMessage("You fiddle with the key in the lock but you can't seem to unlock it.", "DarkRed");
 				return null;
 			}
 			return "You put the key in the lock and turn it.\nThe lock opens and the key disappears.";

@@ -89,7 +89,7 @@ namespace ZuulCS
 			if (!command.HasSecondWord())
 			{
 				String output = "Take what?";
-				TextEffects.ErrorMessage(output);
+				TextEffects.ColoredMessage(output, "DarkRed");
 				return null;
 			} else
 			{
@@ -97,17 +97,17 @@ namespace ZuulCS
 				switch (inventory.TakeItemFrom(CurrentRoom.inventory, itemName)) {
 					case 0:
 						output = itemName + " is not present in this room.";
-						TextEffects.ErrorMessage(output);
+						TextEffects.ColoredMessage(output, "DarkRed");
 						return null;
 					case 1:
 						return "You picked up: " + itemName + ".";
 					case 2:
 						output = "This item is too heavy!\n" + itemName + " weighs: " + CurrentRoom.inventory.FindItem(itemName).Weight + "kg!";
-						TextEffects.ErrorMessage(output);
+						TextEffects.ColoredMessage(output, "DarkRed");
 						return null;
 				}
 				output = "Error: something went wrong in the pickup item function, maybe the developer should have sticked to a boolean...";
-				TextEffects.ErrorMessage(output);
+				TextEffects.ColoredMessage(output, "DarkRed");
 				return null;
 			}
 		}
@@ -117,12 +117,12 @@ namespace ZuulCS
 			if (command.HasThirdWord()) { itemName += " " + command.ThirdWord; }
 			if (!command.HasSecondWord())
 			{
-				TextEffects.ErrorMessage("Drop what?");
+				TextEffects.ColoredMessage("Drop what?", "DarkRed");
 				return null;
 			} else if (CurrentRoom.inventory.TakeItemFrom(inventory, itemName) == 0)
 			{
 				String output = itemName + " is not in your inventory.";
-				TextEffects.ErrorMessage(output);
+				TextEffects.ColoredMessage(output, "DarkRed");
 				return null;
 			} else
 			{
@@ -135,11 +135,11 @@ namespace ZuulCS
 			if (item == null && command.HasThirdWord()) { item = this.inventory.FindItem((command.SecondWord + " " + command.ThirdWord)); }
 			if (!command.HasSecondWord())
 			{
-				TextEffects.ErrorMessage("Use what?");
+				TextEffects.ColoredMessage("Use what?", "DarkRed");
 				return null;
 			} else if (item == null)
 			{
-				TextEffects.ErrorMessage("You cannot use something you don't have.");
+				TextEffects.ColoredMessage("You cannot use something you don't have.", "DarkRed");
 				return null;
 			}
 			if (item is HealthPotion)
@@ -164,7 +164,7 @@ namespace ZuulCS
 		{
 			if (this.equippedItem == null)
 			{
-				TextEffects.ErrorMessage("You don't have a weapon equipped!");
+				TextEffects.ColoredMessage("You don't have a weapon equipped!", "DarkRed");
 				return null;
 			}
 			this.Damage(equippedItem.GetDamage());
@@ -174,7 +174,7 @@ namespace ZuulCS
 		{
 			if (this.equippedItem == null)
 			{
-				TextEffects.ErrorMessage("You don't have a weapon equipped!");
+				TextEffects.ColoredMessage("You don't have a weapon equipped!", "DarkRed");
 				return null;
 			}
 			FightingInRoom.Enemies[0].DamageEnemy(this.equippedItem.damage);
@@ -188,12 +188,12 @@ namespace ZuulCS
 			item = (Weapon)this.inventory.FindItem(itemName);
 			if (!command.HasSecondWord())
 			{
-				TextEffects.ErrorMessage("Equip what?");
+				TextEffects.ColoredMessage("Equip what?", "DarkRed");
 				return null;
 			} else if (item == null)
 			{
 				String output = "You cannot equip something you don't have: " + itemName + ".";
-				TextEffects.ErrorMessage(output);
+				TextEffects.ColoredMessage(output, "DarkRed");
 				return null;
 			} else if (item is Weapon)
 			{
@@ -217,7 +217,7 @@ namespace ZuulCS
 			} else
 			{
 				String output = command.SecondWord + " is not a weapon!";
-				TextEffects.ErrorMessage(output);
+				TextEffects.ColoredMessage(output, "DarkRed");
 				return null;
 			}
 		}
@@ -236,7 +236,7 @@ namespace ZuulCS
 				}
 				return "You have unequipped: " + itemName + "!";
 			}
-			TextEffects.ErrorMessage("You don't have any weapons equipped!");
+			TextEffects.ColoredMessage("You don't have any weapons equipped!", "DarkRed");
 			return null;
 		}
 	}
