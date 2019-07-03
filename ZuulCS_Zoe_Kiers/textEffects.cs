@@ -72,5 +72,14 @@ namespace ZuulCS
 				Console.WriteLine(input);
 			}
 		}
+		public static string GenerateLine(string input)
+		{
+			string output = "";
+			for (int i = 0; i < 40; i++)
+			{
+				output += input;
+			}
+			return output;
+		}
 	}
 }

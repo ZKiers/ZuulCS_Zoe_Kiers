@@ -119,7 +119,7 @@ namespace ZuulCS
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
 			Console.WriteLine(player.CurrentRoom.GetLongDescription());
-			Console.WriteLine(player.GetHealth());
+			TextEffects.ColoredMessage("You have " + player.Health + " health!", "Red");
 		}
 
 		/**
@@ -156,7 +156,7 @@ namespace ZuulCS
 					TextEffects.CheckNullWriteLine(player.CurrentRoom.GetLongDescription());
 					break;
 				case "inventory":
-					TextEffects.CheckNullWriteLine(player.GetHealth());
+					TextEffects.ColoredMessage(player.GetHealth(), "Red");
 					TextEffects.CheckNullWriteLine(player.GetInventoryDesc());
 					break;
 				case "take":

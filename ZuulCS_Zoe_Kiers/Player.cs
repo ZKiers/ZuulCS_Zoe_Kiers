@@ -48,7 +48,9 @@ namespace ZuulCS
 		}
 		public string GetHealth()
 		{
-			return "You have " + Health + " health!";
+			string output = "";
+			output += "You have " + Health + " health!\n";
+			return output;
 		}
 		public bool IsAlive()
 		{
