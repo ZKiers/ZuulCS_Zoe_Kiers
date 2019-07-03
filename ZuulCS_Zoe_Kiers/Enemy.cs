@@ -51,18 +51,18 @@ namespace ZuulCS
 		public Weapon DropWeapon()
 		{
 			List<string> materials = new List<string>();
-			materials.Add("copper");
-			materials.Add("bronze");
-			materials.Add("iron");
-			materials.Add("steel");
+			materials.Add("Copper");
+			materials.Add("Bronze");
+			materials.Add("Iron");
+			materials.Add("Steel");
 
 			List<string> weapons = new List<string>();
-			weapons.Add("dagger");
-			weapons.Add("sword");
-			weapons.Add("longsword");
-			weapons.Add("mace");
-			weapons.Add("hammer");
-			weapons.Add("axe");
+			weapons.Add("Dagger");
+			weapons.Add("Sword");
+			weapons.Add("Longsword");
+			weapons.Add("Mace");
+			weapons.Add("Hammer");
+			weapons.Add("Axe");
 
 			Random RNG = new Random();
 
@@ -78,18 +78,19 @@ namespace ZuulCS
 		public HealthPotion DropHealthPotion()
 		{
 			List<string> names = new List<string>();
-			names.Add("shiny potion");
-			names.Add("glistering potion");
-			names.Add("shining potion");
-			names.Add("life potion");
+			names.Add("Shiny Potion");
+			names.Add("Glistering Potion");
+			names.Add("Shining Potion");
+			names.Add("Life Potion");
 
 			Random RNG = new Random();
 
 			string name = names[RNG.Next(names.Count())];
-			double weight = this.lootQuality / 20;
-			int healingPower = this.lootQuality;
+			int healingPower = RNG.Next(this.lootQuality);
+            double weight = RNG.Next(healingPower);
+            weight = weight / 20;
 
-			HealthPotion output = new HealthPotion(name, weight, healingPower);
+            HealthPotion output = new HealthPotion(name, weight, healingPower);
 			Console.WriteLine("The " + this.DisplayName + " has dropped a " + name + "!");
 			return output;
 		}

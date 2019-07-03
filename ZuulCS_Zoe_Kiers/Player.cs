@@ -19,7 +19,7 @@ namespace ZuulCS
 			if (!fromsave)
 			{
 				Health = 100;
-				Weapon startingDagger = new Weapon("dagger", 1, 5);
+				Weapon startingDagger = new Weapon("Dagger", 1, 5);
 				inventory.AddItem(startingDagger);
 			}
 			LastRoom = null;
@@ -49,7 +49,7 @@ namespace ZuulCS
 		public string GetHealth()
 		{
 			string output = "";
-			output += "You have " + Health + " health!\n";
+			output += "\nYou have " + Health + " health!";
 			return output;
 		}
 		public bool IsAlive()
@@ -65,24 +65,47 @@ namespace ZuulCS
 		}
 		public string GetInventoryDesc()
 		{
+            int lineLength = 40;
 			String output = "";
-			if (this.equippedItem != null)
+            output += "<<" + TextEffects.GenerateLine("-", lineLength) + ">>\n";
+            output += "╔" + TextEffects.GenerateLineText("═", "Equipment Slot", lineLength - 1) + "\n";
+            if (this.equippedItem != null)
 			{
-				output += "You have in your equipment slot: " + this.equippedItem.Name + ".\n";
-			} else
+                output += "╟─ " + this.equippedItem.Name + "\n";
+                output += "║   Weight: " + this.equippedItem.Weight + "kg\n";
+                output += "║   Damage: " + this.equippedItem.damage + "\n";
+
+            } else
 			{
-				output += "You have no weapon in your equipment slot.\n";
+				output += "║  Empty.\n";
 			}
-			if (inventory.ShowItems() != null)
+            output += "╠" + TextEffects.GenerateLineText("═", "Inventory", lineLength - 1) + "\n";
+            if (inventory.ShowItems() != null)
 			{
-				output += "You have in your inventory: " + inventory.ShowItems() + ".\n";
-			} else
+				for (int i = 0; i < inventory.contents.Count(); i++)
+                {
+                    Item item = inventory.contents[i];
+                    output += "╟─ " + item.Name + "\n";
+                    output += "║   Weight: " + item.Weight + "kg\n";
+                    if (item is Weapon)
+                    {
+                        Weapon weapon = (Weapon)item;
+                        output += "║   Damage: " + weapon.damage + "\n";
+                    } else if (item is HealthPotion)
+                    {
+                        HealthPotion potion = (HealthPotion)item;
+                        output += "║   Heals : " + potion.HealingPower + "\n";
+                    }
+                }
+            } else
 			{
-				output += "You have no items in your inventory.\n";
+				output += "║  Empty.\n";
 			}
-			output += "The weight of the items in your inventory is: " + inventory.GetCurrentWeight() + "kg.\n";
-			output += "You can carry a maximum of: " + inventory.GetWeightLimit() + "kg.";
-			return output;
+            output += "╚" + TextEffects.GenerateLine("═", lineLength - 1) + "\n";
+            output += "Current total weight   : " + inventory.GetCurrentWeight() + "kg.\n";
+			output += "Current maximum weight : " + inventory.GetWeightLimit() + "kg.\n";
+            output += "<<" + TextEffects.GenerateLine("-", lineLength) + ">>\n";
+            return output;
 		}
 		public String PickupItem(Command command)
 		{

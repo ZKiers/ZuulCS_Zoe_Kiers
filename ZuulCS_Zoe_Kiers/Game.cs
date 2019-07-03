@@ -40,8 +40,8 @@ namespace ZuulCS
 			rooms.Add(office);
 			rooms.Add(treeHouse);
 			// create the items for in the rooms
-			Weapon sword = new Weapon("sword", 4, 50);
-			HealthPotion hp1 = new HealthPotion("weird potion", 0.1, 40);
+			Weapon sword = new Weapon("Sword", 4, 50);
+			HealthPotion hp1 = new HealthPotion("Weird Potion", 0.1, 40);
 
 			// initialise room exits and put items in the rooms.
 			outside.SetExit("east", theatre);
@@ -73,8 +73,8 @@ namespace ZuulCS
 			
 
 			//lock certain rooms
-			treeHouse.SetLocked(office, "tree key");
-			office.SetLocked(pub, "cool key");
+			treeHouse.SetLocked(office, "Tree Key");
+			office.SetLocked(pub, "Cool Key");
 		}
 
 

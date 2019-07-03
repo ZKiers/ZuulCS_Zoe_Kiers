@@ -72,14 +72,24 @@ namespace ZuulCS
 				Console.WriteLine(input);
 			}
 		}
-		public static string GenerateLine(string input)
+		public static string GenerateLine(string input, int length)
 		{
 			string output = "";
-			for (int i = 0; i < 40; i++)
+			for (int i = 0; i < length; i++)
 			{
 				output += input;
 			}
 			return output;
 		}
+        public static string GenerateLineText(string input, string text, int length)
+        {
+            string output = "";
+            int halfLength = (length - text.Length) / 2;
+            output += GenerateLine(input, halfLength);
+            output += text;
+            output += GenerateLine(input, halfLength);
+            if (((halfLength * 2) + text.Length) % 2 == 0) { output += input; }
+            return output;
+        }
 	}
 }

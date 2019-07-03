@@ -33,7 +33,7 @@ namespace ZuulCS
 		{
 			for (int i = 0; i <= (contents.Count - 1); i++)
 			{
-				if (contents[i].Name == name)
+				if (contents[i].Name.ToLower() == name.ToLower())
 				{
 					return contents[i];
 				}
