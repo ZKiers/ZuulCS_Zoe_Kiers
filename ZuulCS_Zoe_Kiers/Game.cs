@@ -119,7 +119,7 @@ namespace ZuulCS
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
 			Console.WriteLine(player.CurrentRoom.GetLongDescription());
-			TextEffects.ColoredMessage("You have " + player.Health + " health!", "Red");
+			TextEffects.ColoredMessage("You have " + player.Health + " health!\n", "Red");
 		}
 
 		/**
@@ -157,7 +157,7 @@ namespace ZuulCS
 					break;
 				case "inventory":
 					TextEffects.ColoredMessage(player.GetHealth(), "Red");
-					TextEffects.CheckNullWriteLine(player.GetInventoryDesc());
+					TextEffects.SecondaryColoredMessage(player.GetInventoryDesc(), "White", "DarkGray");
 					break;
 				case "take":
 					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!", "DarkRed"); break; }

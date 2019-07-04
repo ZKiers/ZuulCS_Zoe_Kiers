@@ -62,8 +62,22 @@ namespace ZuulCS
 					Console.ForegroundColor = ConsoleColor.Yellow;
 					break;
 			}
-			if (input != null) { Console.WriteLine(input); }
+			if (input != null) { Console.Write(input); }
 			Console.ResetColor();
+		}
+		public static void SecondaryColoredMessage(string input, string color, string secondColor)
+		{
+			string[] split = input.Split(new string[] { "<S>" }, StringSplitOptions.None);
+			for (int i = 0; i < split.Length; i++)
+			{
+				if (i % 2 == 0)
+				{
+					ColoredMessage(split[i], color);
+				} else
+				{
+					ColoredMessage(split[i], secondColor);
+				}
+			}
 		}
 		public static void CheckNullWriteLine(String input)
 		{

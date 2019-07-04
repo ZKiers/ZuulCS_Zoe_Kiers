@@ -49,7 +49,7 @@ namespace ZuulCS
 		public string GetHealth()
 		{
 			string output = "";
-			output += "\nYou have " + Health + " health!";
+			output += "\nYou have " + Health + " health!\n";
 			return output;
 		}
 		public bool IsAlive()
@@ -72,8 +72,8 @@ namespace ZuulCS
             if (this.equippedItem != null)
 			{
                 output += "╟─ " + this.equippedItem.Name + "\n";
-                output += "║   Weight: " + this.equippedItem.Weight + "kg\n";
-                output += "║   Damage: " + this.equippedItem.damage + "\n";
+                output += "║   <S>Weight: " + this.equippedItem.Weight + "kg<S>\n";
+                output += "║   <S>Damage: " + this.equippedItem.damage + "<S>\n";
 
             } else
 			{
@@ -86,15 +86,15 @@ namespace ZuulCS
                 {
                     Item item = inventory.contents[i];
                     output += "╟─ " + item.Name + "\n";
-                    output += "║   Weight: " + item.Weight + "kg\n";
+                    output += "║   <S>Weight: " + item.Weight + "kg<S>\n";
                     if (item is Weapon)
                     {
                         Weapon weapon = (Weapon)item;
-                        output += "║   Damage: " + weapon.damage + "\n";
+                        output += "║   <S>Damage: " + weapon.damage + "<S>\n";
                     } else if (item is HealthPotion)
                     {
                         HealthPotion potion = (HealthPotion)item;
-                        output += "║   Heals : " + potion.HealingPower + "\n";
+                        output += "║   <S>Heals : " + potion.HealingPower + "<S>\n";
                     }
                 }
             } else
