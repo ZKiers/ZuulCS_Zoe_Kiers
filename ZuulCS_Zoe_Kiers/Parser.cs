@@ -23,7 +23,7 @@ namespace ZuulCS
 			string word3 = null;
 
 			string[] words = Console.ReadLine().Split(' ');
-			if (words.Length > 0) { word1 = words[0]; }
+			if (words.Length > 0) { word1 = words[0].ToLower(); }
 			if (words.Length > 1) { word2 = words[1]; }
 			if (words.Length > 2) { word3 = words[2]; }
 			if (words.Length > 3)
