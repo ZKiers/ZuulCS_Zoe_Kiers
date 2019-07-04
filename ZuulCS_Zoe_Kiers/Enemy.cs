@@ -40,10 +40,10 @@ namespace ZuulCS
 			switch (DisplayName)
 			{
 				case "BadBoi":
-					this.attackDesc = "The BadBoi swings at you with it's weak arms and hits you!";
+					this.attackDesc = "The BadBoi swings at you with it's weak arms and hits you!\n";
 					return this.Damage;
                 case "Fritz":
-                    this.attackDesc = "Fritz stabs you with a stick!";
+                    this.attackDesc = "Fritz stabs you with a stick!\n";
                     return this.Damage;
 			}
 			return 0;

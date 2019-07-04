@@ -54,7 +54,7 @@ namespace ZuulCS
 						break;
 					case "Key":
 						Key key = serializer.Deserialize<Key>(itemInfo[1]);
-						Console.WriteLine("As you come back to this world the " + key.Name + " vanishes from your inventory.");
+						TextEffects.ColoredMessage("As you come back to this world the " + key.Name + " vanishes from your inventory.", "Yellow");
 						break;
 					case "Item":
 						output.inventory.AddItem(serializer.Deserialize<Item>(itemInfo[1]));

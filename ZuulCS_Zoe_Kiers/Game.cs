@@ -98,8 +98,8 @@ namespace ZuulCS
 				if (!player.IsAlive())
 				{
 					finished = true;
-					TextEffects.ColoredMessage("Game Over", "DarkRed");
-					TextEffects.ColoredMessage("You've Died", "DarkRed");
+					TextEffects.ColoredMessage("Game Over\n", "DarkRed");
+					TextEffects.ColoredMessage("You've Died\n", "DarkRed");
 				}
 			}
 			Console.WriteLine("Saving...");
@@ -133,7 +133,7 @@ namespace ZuulCS
 
 			if (command.IsUnknown())
 			{
-				TextEffects.ColoredMessage("I don't know what you mean...", "DarkRed");
+				TextEffects.ColoredMessage("I don't know what you mean...\n", "DarkRed");
 				return false;
 			}
 
@@ -144,15 +144,15 @@ namespace ZuulCS
 					PrintHelp();
 					break;
 				case "go":
-					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!", "DarkRed"); break; }
+					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!\n", "DarkRed"); break; }
 					GoRoom(command);
 					break;
 				case "quit":
-					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!", "DarkRed"); break; }
+					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!\n", "DarkRed"); break; }
 					wantToQuit = true;
 					break;
 				case "look":
-					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!", "DarkRed"); break; }
+					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!\n", "DarkRed"); break; }
 					TextEffects.CheckNullWriteLine(player.CurrentRoom.GetLongDescription());
 					break;
 				case "inventory":
@@ -160,11 +160,11 @@ namespace ZuulCS
 					TextEffects.SecondaryColoredMessage(player.GetInventoryDesc(), "White", "DarkGray");
 					break;
 				case "take":
-					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!", "DarkRed"); break; }
+					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!\n", "DarkRed"); break; }
 					TextEffects.CheckNullWriteLine(player.PickupItem(command));
 					break;
 				case "drop":
-					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!", "DarkRed"); break; }
+					if (inCombat) { TextEffects.ColoredMessage("You can't do that in combat!\n", "DarkRed"); break; }
 					TextEffects.CheckNullWriteLine(player.DropItem(command));
 					break;
 				case "use":
@@ -196,8 +196,9 @@ namespace ZuulCS
 			Console.WriteLine("You are lost. You are alone.");
 			Console.WriteLine("You wander around at the university.");
 			Console.WriteLine();
-			Console.WriteLine("Your command words are:");
+			Console.WriteLine("╔" + TextEffects.GenerateLineText("═", "Commands", 39));
 			parser.ShowCommands();
+			Console.Write("╚" + TextEffects.GenerateLine("═", 39) + "\n");
 		}
 
 		/**
@@ -209,7 +210,7 @@ namespace ZuulCS
 			if (!command.HasSecondWord())
 			{
 				// if there is no second word, we don't know where to go...
-				TextEffects.ColoredMessage("Go where?", "DarkRed");
+				TextEffects.ColoredMessage("Go where?\n", "DarkRed");
 				return;
 			}
 
@@ -217,14 +218,14 @@ namespace ZuulCS
 			
 			// Try to leave current room.
 			Room nextRoom = player.CurrentRoom.GetExit(direction);
-			if (direction == "back") { nextRoom = player.LastRoom; }
+			if (direction.ToLower() == "back") { nextRoom = player.LastRoom; }
 
 			if (nextRoom == null)
 			{
-				TextEffects.ColoredMessage("There is no door to " + direction + "!", "DarkRed");
+				TextEffects.ColoredMessage("There is no door to " + direction + "!\n", "DarkRed");
 			} else if(nextRoom.IsLocked())
 			{
-				TextEffects.ColoredMessage("This door is locked.", "DarkRed");
+				TextEffects.ColoredMessage("This door is locked.\n", "DarkRed");
 			}
 			else
 			{

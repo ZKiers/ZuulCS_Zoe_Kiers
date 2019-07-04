@@ -32,7 +32,7 @@ namespace ZuulCS
 		{
 			if ((Health + amount) > 100)
 			{
-				int healAmount = (Health + amount) - 100;
+				int healAmount = amount - ((Health + amount) - 100);
 				Health = 100;
 				return "You've healed by: " + healAmount + "!";
 			}
