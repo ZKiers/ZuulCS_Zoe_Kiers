@@ -254,8 +254,11 @@ namespace ZuulCS
 					ProcessCommand(command);
 					if (command.CommandWord == "attack" || command.CommandWord == "use" || command.CommandWord == "equip" || command.CommandWord == "unequip")
 					{
-						player.Damage(room.Enemies[0].AttackPlayer());
-						TextEffects.ColoredMessage(room.Enemies[0].attackDesc, "DarkRed");
+						if (room.Enemies[0].Health > 0)
+						{
+							player.Damage(room.Enemies[0].AttackPlayer());
+							TextEffects.ColoredMessage(room.Enemies[0].attackDesc, "DarkRed");
+						}
 					}
 					if (!player.IsAlive()) { break; }
 				}
