@@ -9,14 +9,25 @@ namespace ZuulCS
 		private Player player;
 		private bool loadedFromSave;
 		private bool inCombat;
+		private static Game instance = null;
 
-		public Game()
+		private Game()
 		{
 			loadedFromSave = false;
 			player = new Player(false);
 			if (System.IO.File.Exists(SaveFile.saveFileName)) { player = SaveFile.LoadPlayerFromSaveFile(); loadedFromSave = true; }
 			CreateRooms();
 			parser = new Parser();
+		}
+
+		public static Game getInstance()
+		{
+			if(instance == null)
+			{
+				instance = new Game();
+			}
+
+			return instance;
 		}
 
 		private void CreateRooms()
@@ -42,12 +53,15 @@ namespace ZuulCS
 			// create the items for in the rooms
 			Weapon sword = new Weapon("Sword", 4, 50);
 			HealthPotion hp1 = new HealthPotion("Weird Potion", 0.1, 40);
+			//Item genericItem = new Item();
+			//genericItem.Name = "Ring";
 
 			// initialise room exits and put items in the rooms.
 			outside.SetExit("east", theatre);
 			outside.SetExit("south", lab);
 			outside.SetExit("west", pub);
 			outside.SetExit("up", treeHouse);
+			//outside.inventory.AddItem(genericItem);
 
 			theatre.SetExit("west", outside);
 			theatre.inventory.AddItem(sword);

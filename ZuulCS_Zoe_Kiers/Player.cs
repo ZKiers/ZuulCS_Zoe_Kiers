@@ -156,15 +156,19 @@ namespace ZuulCS
 		}
 		public String UseItem(Command command)
 		{
-			Item item = this.inventory.FindItem(command.SecondWord);
+			Item item = null;
+			if(command.HasSecondWord())
+			{
+                item = this.inventory.FindItem(command.SecondWord);
+            }
 			if (item == null && command.HasThirdWord()) { item = this.inventory.FindItem((command.SecondWord + " " + command.ThirdWord)); }
 			if (!command.HasSecondWord())
 			{
-				TextEffects.ColoredMessage("Use what?", "DarkRed");
+				TextEffects.ColoredMessage("Use what?\n", "DarkRed");
 				return null;
 			} else if (item == null)
 			{
-				TextEffects.ColoredMessage("You cannot use something you don't have.", "DarkRed");
+				TextEffects.ColoredMessage("You cannot use something you don't have.\n", "DarkRed");
 				return null;
 			}
 			if (item is HealthPotion)

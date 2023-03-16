@@ -26,3 +26,11 @@ D:\schooljaar 2018-2019\periode 4\ZUULCS\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_K
 D:\schooljaar 2018-2019\periode 4\ZUULCS\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.csproj.CoreCompileInputs.cache
 D:\schooljaar 2018-2019\periode 4\ZUULCS\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.exe
 D:\schooljaar 2018-2019\periode 4\ZUULCS\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.pdb
+C:\Users\zoe-k\OneDrive\Desktop\C#\ZuulCS\ZuulCS_Zoe_Kiers\bin\Debug\ZuulCS_Zoe_Kiers.exe.config
+C:\Users\zoe-k\OneDrive\Desktop\C#\ZuulCS\ZuulCS_Zoe_Kiers\bin\Debug\ZuulCS_Zoe_Kiers.exe
+C:\Users\zoe-k\OneDrive\Desktop\C#\ZuulCS\ZuulCS_Zoe_Kiers\bin\Debug\ZuulCS_Zoe_Kiers.pdb
+C:\Users\zoe-k\OneDrive\Desktop\C#\ZuulCS\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.csproj.AssemblyReference.cache
+C:\Users\zoe-k\OneDrive\Desktop\C#\ZuulCS\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.csproj.SuggestedBindingRedirects.cache
+C:\Users\zoe-k\OneDrive\Desktop\C#\ZuulCS\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.csproj.CoreCompileInputs.cache
+C:\Users\zoe-k\OneDrive\Desktop\C#\ZuulCS\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.exe
+C:\Users\zoe-k\OneDrive\Desktop\C#\ZuulCS\ZuulCS_Zoe_Kiers\obj\Debug\ZuulCS_Zoe_Kiers.pdb

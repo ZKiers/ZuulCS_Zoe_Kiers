@@ -9,8 +9,8 @@ namespace ZuulCS
 		 */
 		public static void Main(string[] args)
 		{
-			Game game = new Game();
-			game.Play();
+			Game game = Game.getInstance();
+            game.Play();
 		}
 	}
 }

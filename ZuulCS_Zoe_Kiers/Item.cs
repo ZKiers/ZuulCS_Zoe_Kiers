@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZuulCS
 {
-	public class Item
+	public abstract class Item
 	{
 		public string Name { get; set; }
 		public double Weight { get; set; }
@@ -15,7 +15,7 @@ namespace ZuulCS
 		}
 		public virtual string UseItem(Command command, Room currentRoom)
 		{
-			return "This is just a normal item, it has no use...\n What did you want to do? Snort it??";
+			return "This is just a normal item, it has no use...\n What did you want to do? Snort it??\n";
 		}
 	}
 }

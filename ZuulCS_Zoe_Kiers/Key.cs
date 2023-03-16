@@ -35,26 +35,26 @@ namespace ZuulCS
 		public override string UseItem(Command command, Room currentRoom)
 		{
 			string input = command.ThirdWord;
-			if(!command.HasThirdWord())
+			if(!command.HasThirdWord() || command.ThirdWord.ToLower() == "key")
 			{
-				TextEffects.ColoredMessage("Use it on what?", "DarkRed");
+				TextEffects.ColoredMessage("Use it on what?\n", "DarkRed");
 				return null;
 			}
 			Room target = currentRoom.GetExit(input);
 			if (target == null)
 			{
-				TextEffects.ColoredMessage("There is door there to unlock!", "DarkRed");
+				TextEffects.ColoredMessage("There is no door there to unlock!\n", "DarkRed");
 				return null;
 			} else if (!target.IsLocked())
 			{
-				TextEffects.ColoredMessage("That door isn't locked!", "DarkRed");
+				TextEffects.ColoredMessage("That door isn't locked!\n", "DarkRed");
 				return null;
 			} else if (!target.UseKey(this))
 			{
-				TextEffects.ColoredMessage("You fiddle with the key in the lock but you can't seem to unlock it.", "DarkRed");
+				TextEffects.ColoredMessage("You fiddle with the key in the lock but you can't seem to unlock it.\n", "DarkRed");
 				return null;
 			}
-			return "You put the key in the lock and turn it.\nThe lock opens and the key disappears.";
+			return "You put the key in the lock and turn it.\nThe lock opens and the key disappears.\n";
 		}
 	}
 }
