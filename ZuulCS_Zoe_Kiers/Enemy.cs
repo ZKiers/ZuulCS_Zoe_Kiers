@@ -11,6 +11,7 @@ namespace ZuulCS
 		Random RNG = new Random();
 		public string DisplayName { get; }
 		public int Health { get; private set; }
+		public int MaxHealth { get; }
 		public int Damage { get; }
 		public int lootQuality { get; }
 		public string attackDesc { get; private set; }
@@ -30,6 +31,7 @@ namespace ZuulCS
 					this.lootQuality = 30;
                     break;
 			}
+			this.MaxHealth = this.Health;
 		}
 		public void DamageEnemy(int input)
 		{

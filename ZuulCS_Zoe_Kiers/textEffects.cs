@@ -105,5 +105,15 @@ namespace ZuulCS
             if (((halfLength * 2) + text.Length) % 2 == 0) { output += input; }
             return output;
         }
+		public static string GenerateProgressBar(int width, int maxAmount, int currentAmount)
+		{
+			String empty = "░";
+			String full = "█";
+			String output = "";
+			float filledAmount = (float)width / (((float)maxAmount / ((float)currentAmount / 100)) / 100);
+			output += GenerateLine(full, (int)filledAmount);
+			output += GenerateLine(empty, width - (int)filledAmount);
+			return output;
+		}
 	}
 }
