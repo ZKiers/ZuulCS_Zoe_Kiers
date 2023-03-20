@@ -161,7 +161,10 @@ namespace ZuulCS
 			{
                 item = this.inventory.FindItem(command.SecondWord);
             }
-			if (item == null && command.HasThirdWord()) { item = this.inventory.FindItem((command.SecondWord + " " + command.ThirdWord)); }
+			if (item == null && command.HasThirdWord())
+			{ 
+				item = this.inventory.FindItem((command.SecondWord + " " + command.ThirdWord));
+			}
 			if (!command.HasSecondWord())
 			{
 				TextEffects.ColoredMessage("Use what?\n", "DarkRed");

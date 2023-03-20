@@ -261,8 +261,8 @@ namespace ZuulCS
 			{
 				Console.WriteLine("An enemy engages you in combat!");
 				Console.WriteLine(room.Enemies[0].DisplayName + " appeared to fight you!");
-				Console.WriteLine("Enemy Health: " + TextEffects.GenerateProgressBar(8, room.Enemies[0].MaxHealth, room.Enemies[0].Health));
-				while (room.Enemies[0].Health > 0)
+                Console.WriteLine(room.Enemies[0].statCard(20));
+                while (room.Enemies[0].Health > 0)
 				{
 					Console.WriteLine("What do you do?");
 					Command command = parser.GetCommand();
@@ -273,7 +273,8 @@ namespace ZuulCS
 						{
 							player.Damage(room.Enemies[0].AttackPlayer());
 							TextEffects.ColoredMessage(room.Enemies[0].attackDesc, "DarkRed");
-                            Console.WriteLine("Enemy Health: " + TextEffects.GenerateProgressBar(8, room.Enemies[0].MaxHealth, room.Enemies[0].Health));
+                            TextEffects.ColoredMessage("You have " + player.Health + " health!\n", "Red");
+                            Console.WriteLine(room.Enemies[0].statCard(20));
                         }
 					}
 					if (!player.IsAlive()) { break; }

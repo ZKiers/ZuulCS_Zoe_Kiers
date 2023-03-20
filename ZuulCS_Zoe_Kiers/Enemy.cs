@@ -96,5 +96,14 @@ namespace ZuulCS
 			Console.WriteLine("The " + this.DisplayName + " has dropped a " + name + "!");
 			return output;
 		}
+		public string statCard(int width)
+		{
+			string output = "";
+			output += "╔" + TextEffects.GenerateLineText("═", this.DisplayName, width) + "╕\n";
+			output += "╟─" + TextEffects.FinishLine(width - 2, " Health:", " ") + "│\n";
+			output += "║" + TextEffects.GenerateLineText(" ", TextEffects.GenerateProgressBar(width/2, this.MaxHealth, this.Health), width - 2) + "│\n";
+			output += "╚" + TextEffects.GenerateLine("═", width - 1) + "╛\n";
+            return output;
+		}
 	}
 }
