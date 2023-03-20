@@ -115,5 +115,15 @@ namespace ZuulCS
 			output += GenerateLine(empty, width - (int)filledAmount);
 			return output;
 		}
+		public static string FinishLine(int length, string input, string filler)
+		{
+			string output = "";
+			output += input;
+			for (int i = input.Length; i < length; i++)
+			{
+				output += filler;
+			}
+			return output;
+		}
 	}
 }

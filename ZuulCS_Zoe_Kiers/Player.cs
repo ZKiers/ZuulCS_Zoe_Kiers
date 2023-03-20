@@ -68,40 +68,40 @@ namespace ZuulCS
             int lineLength = 40;
 			String output = "";
             output += "<<" + TextEffects.GenerateLine("-", lineLength) + ">>\n";
-            output += "╔" + TextEffects.GenerateLineText("═", "Equipment Slot", lineLength - 1) + "\n";
+            output += "╔" + TextEffects.GenerateLineText("═", "Equipment Slot", lineLength - 1) + "╕\n";
             if (this.equippedItem != null)
 			{
-                output += "╟─ " + this.equippedItem.Name + "\n";
-                output += "║   <S>Weight: " + this.equippedItem.Weight + "kg<S>\n";
-                output += "║   <S>Damage: " + this.equippedItem.damage + "<S>\n";
+                output += TextEffects.FinishLine(lineLength,"╟─ " + this.equippedItem.Name, " ") + "│\n";
+                output += TextEffects.FinishLine(lineLength + 6,"║   <S>Weight: " + this.equippedItem.Weight + "kg<S>", " ") + "│\n";
+                output += TextEffects.FinishLine(lineLength + 6,"║   <S>Damage: " + this.equippedItem.damage + "<S>", " ") + "│\n";
 
             } else
 			{
-				output += "║  Empty.\n";
-			}
-            output += "╠" + TextEffects.GenerateLineText("═", "Inventory", lineLength - 1) + "\n";
+                output += TextEffects.FinishLine(lineLength, "║  Empty.", " ") + "│\n";
+            }
+            output += TextEffects.FinishLine(lineLength, "╠" + TextEffects.GenerateLineText("═", "Inventory", lineLength - 1), " ") + "╡\n";
             if (inventory.ShowItems() != null)
 			{
 				for (int i = 0; i < inventory.contents.Count(); i++)
                 {
                     Item item = inventory.contents[i];
-                    output += "╟─ " + item.Name + "\n";
-                    output += "║   <S>Weight: " + item.Weight + "kg<S>\n";
+                    output += TextEffects.FinishLine(lineLength,"╟─ " + item.Name, " ") + "│\n";
+                    output += TextEffects.FinishLine(lineLength + 6,"║   <S>Weight: " + item.Weight + "kg<S>", " ") + "│\n";
                     if (item is Weapon)
                     {
                         Weapon weapon = (Weapon)item;
-                        output += "║   <S>Damage: " + weapon.damage + "<S>\n";
+                        output += TextEffects.FinishLine(lineLength + 6,"║   <S>Damage: " + weapon.damage + "<S>", " ") + "│\n";
                     } else if (item is HealthPotion)
                     {
                         HealthPotion potion = (HealthPotion)item;
-                        output += "║   <S>Heals : " + potion.HealingPower + "<S>\n";
+                        output += TextEffects.FinishLine(lineLength + 6, "║   <S>Heals : " + potion.HealingPower + "<S>", " ") + "│\n";
                     }
                 }
             } else
 			{
-				output += "║  Empty.\n";
+				output += TextEffects.FinishLine(lineLength, "║  Empty.", " ") + "│\n";
 			}
-            output += "╚" + TextEffects.GenerateLine("═", lineLength - 1) + "\n";
+            output += "╚" + TextEffects.GenerateLine("═", lineLength - 1) + "╛\n";
             output += "Current total weight   : " + inventory.GetCurrentWeight() + "kg.\n";
 			output += "Current maximum weight : " + inventory.GetWeightLimit() + "kg.\n";
             output += "<<" + TextEffects.GenerateLine("-", lineLength) + ">>\n";
