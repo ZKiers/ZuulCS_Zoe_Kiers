@@ -32,8 +32,9 @@ namespace ZuulCS
 		{
 			return key;
 		}
-		public override string UseItem(Command command, Room currentRoom)
+		public override string UseItem(Command command, Player player)
 		{
+			Room currentRoom = player.CurrentRoom;
 			string input = command.ThirdWord;
 			if(!command.HasThirdWord() || command.ThirdWord.ToLower() == "key")
 			{
@@ -54,6 +55,7 @@ namespace ZuulCS
 				TextEffects.ColoredMessage("You fiddle with the key in the lock but you can't seem to unlock it.\n", "DarkRed");
 				return null;
 			}
+			this.Consumed = true;
 			return "You put the key in the lock and turn it.\nThe lock opens and the key disappears.\n";
 		}
 	}

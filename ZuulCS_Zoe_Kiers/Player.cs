@@ -174,7 +174,7 @@ namespace ZuulCS
 				TextEffects.ColoredMessage("You cannot use something you don't have.\n", "DarkRed");
 				return null;
 			}
-			if (item is HealthPotion)
+			/*if (item is HealthPotion)
 			{
 				string output = "You chug the potion not really knowing what it does.\n";
 				output += this.Heal(((HealthPotion)item).HealingPower);
@@ -189,8 +189,13 @@ namespace ZuulCS
 					this.inventory.RemoveItem(item);
 				}
 				return output;
+			}*/
+			string output = item.UseItem(command, this);
+			if(item.Consumed)
+			{
+				this.inventory.RemoveItem(item);
 			}
-			return item.UseItem(command, this.CurrentRoom);
+			return output;
 		}
 		public string Attack()
 		{

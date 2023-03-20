@@ -16,7 +16,7 @@ namespace ZuulCS
 			this.damage = setDamage;
 		}
 		public Weapon() { }
-		public override string UseItem(Command command, Room currentRoom)
+		public override string UseItem(Command command, Player player)
 		{
 			return "This is a weapon, you don't just \"use\" it.";
 		}
